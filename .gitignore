@@ -4,5 +4,4 @@ Data/*
 !Data/meta.php
 !Data/.htaccess
 *.~lock.*
-Code/phpbrowscap/cache/*
 Experiment/p.txt
