@@ -31,7 +31,7 @@
  *
  */
 
-var COLLECTOR = {
+const COLLECTOR = {
 
     /**
      *  Sets starting time to a property we can access anywhere in the namespace
@@ -119,7 +119,7 @@ var COLLECTOR = {
             var startTime = COLLECTOR.startTime;
 
             // these happen immediately on load
-            $(':input:not(:radio):enabled:visible:not(.logout):first').focusWithoutScrolling(); // focus cursor on first input
+            $(':input:not(:radio):enabled:visible:not(.logout)').first().focusWithoutScrolling(); // focus cursor on first input
             $("#loadingForm").submit();                         // submit form to advance page
 
             // allows for the collapsing of readable() outputs
@@ -166,17 +166,15 @@ var COLLECTOR = {
             
             // check for window focus every .2 seconds
             var focusChecks = 0, focusCount  = 0, focusProp;
-            function focusCheck() {
+            
+            window.setInterval(e => {
                 focusChecks++;
-                if (document.hasFocus()) {
-                    focusCount++;
-                }
-                COLLECTOR.timer(.2, focusCheck);
-            }
-            focusCheck();
+                
+                if (document.hasFocus()) focusCount++;
+            }, 20);
 
             $("form").submit( function(event){
-                $("#content").addClass("invisible");            // hide content
+                $("#content").addClass("invisible"); // hide content
                 focusProp = Math.round((focusCount/focusChecks)*1000) / 1000;
                 COLLECTOR.add_input("Trial_Focus",            focusProp);
                 COLLECTOR.add_input("Trial_Duration",         COLLECTOR.getRT());
@@ -197,7 +195,7 @@ var COLLECTOR = {
             if (isNaN(trialTime) || trialTime > 0) {
                 $("#content").removeClass("invisible");                     // unhide trial contents
                 COLLECTOR.startTime = Date.now();
-                $(':input:not(:radio,:checkbox):enabled:visible:first').focusWithoutScrolling();  // focus cursor on first input
+                $(':input:not(:radio,:checkbox):enabled:visible').first().focusWithoutScrolling();  // focus cursor on first input
             } else {
                 $("form").submit();
             }
@@ -253,7 +251,7 @@ var COLLECTOR = {
 
             // prevent the backspace key from navigating back.
             // http://stackoverflow.com/questions/1495219/how-can-i-prevent-the-backspace-key-from-navigating-back
-            $(document).bind('keydown', function (event) {
+            $(document).on('keydown', function (event) {
               if (event.keyCode === 8) {
                 var doPrevent = true;
                 var types = ["text", "password", "file", "search", "email", "number", "date", "color", "datetime", "datetime-local", "month", "range", "search", "tel", "time", "url", "week"];
@@ -400,6 +398,4 @@ jQuery.fn.preventDoubleSubmission = function() {
   return this;
 };
 
-
-
-$(window).load(UTIL.init);
+$(window).on("load", (UTIL.init));
