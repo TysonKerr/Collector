@@ -329,11 +329,11 @@ function save_session($session) {
 }
 
 function read_session_file($filename) {
-    return json_decode(gzinflate(file_get_contents($filename)), true);
+    return unserialize(gzinflate(file_get_contents($filename)));
 }
 
 function write_session_file($filename, $data) {
-    file_put_contents($filename, gzdeflate(json_encode($data)));
+    file_put_contents($filename, gzdeflate(serialize($data)));
 }
 
 function get_trial_proc_values($trial_set, $post_level) {

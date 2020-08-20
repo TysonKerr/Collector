@@ -12,6 +12,11 @@ foreach ($stimuli as $stim_row) {
 ?>
 
 <style>
+    .topMsg {
+        max-width: 700px;
+        margin: 5px auto 10px;
+        font-size: 125%;
+    }
 </style>
 
 <section class="vcenter">

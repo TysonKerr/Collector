@@ -201,19 +201,19 @@ const COLLECTOR = {
             }
 
             // start timers
-            if (!(isNaN(trialTime)) && trialTime > 0) {                          // if time has a numeric value
+            if (trialTime > 0) {
                 COLLECTOR.timer(trialTime, function() {             // start the timer
                     // submit the form when time is up
                     $("form").submit();                         // see common:init "intercept form submit"
                 }, false);                                      // run the timer (no minTime set)
                 $(":input").addClass("noEnter");                // disable enter from submitting the trial
                 $("textarea").removeClass("noEnter");           // allow textarea line returns
-                if(isNaN(minTime)) {
+                if(isNaN(minTime) || minTime >= trialTime) {
                     fsubmit.addClass("invisible");                  // hide submit button
                 }
             }
 
-            if (!(isNaN(minTime))) {
+            if (!(isNaN(minTime)) && (isNaN(trialTime) || minTime < trialTime)) {
                 fsubmit.prop("disabled", true);                 // disable submit button when minTime is set
                 $(":input").addClass("noEnter");                // disable enter from submitting the trial
                 $("textarea").removeClass("noEnter");               // allow line return in <textarea>

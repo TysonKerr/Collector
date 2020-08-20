@@ -70,12 +70,14 @@
     }
     
     function get_selectivity_index($values, $score, $num_correct) {
+        if (count($values) === 0) return 0;
+        
         $max = array_sum($values);
         $ave = $max / count($values);
         $chance = $ave * $num_correct;
         $ideal = get_ideal_score($values, $num_correct);
         
-        if ($ideal - $chance === 0) return 'NaN';
+        if ($ideal - $chance === 0) return 0;
         
         $selectivity_index = ($score - $chance) / ($ideal - $chance);
         return $selectivity_index;
