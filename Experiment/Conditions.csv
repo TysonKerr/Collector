@@ -1,8 +1,8 @@
 Number,Stimuli,Procedure,Condition Description,Condition Notes
 1,nothing.csv,demographics.csv,demographics,demo
-2,aliens.csv,performance-check.csv,performance checks,demo
-3,nothing.csv,focus-check.csv,focus check,demo
-4,aliens.csv,tutorial.csv,tutorial,demo
-5,PSJ_stim.csv,speed-checks.csv,speed checks,demo
-6,PSJ_stim.csv,attention-checks.csv,attention checks,demo
+2,nothing.csv,focus-check.csv,focus check,demo
+3,aliens.csv,tutorial.csv,tutorial,demo
+4,aliens.csv,performance-check.csv,accuracy check,demo
+5,PSJ_stim.csv,attention-checks.csv,attention checks,demo
+6,PSJ_stim.csv,speed-checks.csv,speed checks,demo
 7,nothing.csv,take-a-break.csv,taking a break,demo
