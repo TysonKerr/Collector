@@ -1,0 +1,217 @@
+Cue,Answer,Alt Cue 1,Alt Answer 1,Alt Cue 2,Alt Answer 2,Similarity Judgment,Similarity Judgment Subgroup,Context,Context Answer,ConCat,AdvShuffle; target cue,AdvShuffle Block,"AdvShuffle; Target Context, Context Answer, ConCat"
+Images/Grossman/Grossman1.jpg,Grossman,,,,,,,Images/Context/mm/Atomium.jpg,Atomium,mm,1.1,1,mm
+Images/Grossman/Grossman2.jpg,Grossman,,,,,,,Images/Context/mm/Bellagio_Fountains.jpg,Bellagio Fountains,mm,1.1,1,mm
+Images/Grossman/Grossman3.jpg,Grossman,,,,,,,Images/Context/mm/Boston_Common.jpg,Boston Common,mm,1.1,1,mm
+Images/Grossman/Grossman4.jpg,Grossman,,,,,,,Images/Context/nat/Amazon_River.jpg,Amazon River,nat,1.1,1,nat
+Images/Grossman/Grossman5.jpg,Grossman,,,,,,,Images/Context/nat/Angel's_Landing.jpg,Angel's Landing,nat,1.1,1,nat
+Images/Grossman/Grossman6.jpg,Grossman,,,,,,,Images/Context/nat/Arashiyama_Bamboo_Forest.jpg,Arashiyama Bamboo Forest,nat,1.1,1,nat
+Images/Grossman/Grossman7.jpg,Grossman,,,,,,,,,,1.2,1,
+Images/Grossman/Grossman8.jpg,Grossman,,,,,,,,,,1.2,1,
+Images/Grossman/Grossman9.jpg,Grossman,,,,,,,,,,1.2,1,
+Images/Grossman/Grossman10.jpg,Grossman,,,,,,,,,,1.2,1,
+Images/Grossman/Grossman11.jpg,Grossman,,,,,,,,,,1.2,1,
+Images/Grossman/Grossman12.jpg,Grossman,,,,,,,,,,1.2,1,
+Images/Grossman/Grossman13.jpg,Grossman,,,,,,,,,,1.3,1,
+Images/Grossman/Grossman14.jpg,Grossman,,,,,,,,,,1.3,1,
+Images/Grossman/Grossman15.jpg,Grossman,,,,,,,,,,1.3,1,
+Images/Grossman/Grossman16.jpg,Grossman,,,,,,,,,,1.3,1,
+Images/Grossman/Grossman17.jpg,Grossman,,,,,,,,,,1.3,1,
+Images/Grossman/Grossman18.jpg,Grossman,,,,,,,,,,1.3,1,
+Images/Hawkins/Hawkins1.jpg,Hawkins,,,,,,,Images/Context/mm/Carnegie_Hall.jpg,Carnegie Hall,mm,2.1,2,mm
+Images/Hawkins/Hawkins2.jpg,Hawkins,,,,,,,Images/Context/mm/Dome_of_the_Rock.jpg,Dome of the Rock,mm,2.1,2,mm
+Images/Hawkins/Hawkins3.jpg,Hawkins,,,,,,,Images/Context/mm/Eiffel_Tower.jpg,Eiffel Tower,mm,2.1,2,mm
+Images/Hawkins/Hawkins4.jpg,Hawkins,,,,,,,Images/Context/nat/Bryce_Canyon.jpg,Bryce Canyon,nat,2.1,2,nat
+Images/Hawkins/Hawkins5.jpg,Hawkins,,,,,,,Images/Context/nat/Carlsbad_Caverns.jpg,Carlsbad Caverns,nat,2.1,2,nat
+Images/Hawkins/Hawkins6.jpg,Hawkins,,,,,,,Images/Context/nat/Death_Valley.jpg,Death Valley,nat,2.1,2,nat
+Images/Hawkins/Hawkins7.jpg,Hawkins,,,,,,,,,,2.2,2,
+Images/Hawkins/Hawkins8.jpg,Hawkins,,,,,,,,,,2.2,2,
+Images/Hawkins/Hawkins9.jpg,Hawkins,,,,,,,,,,2.2,2,
+Images/Hawkins/Hawkins10.jpg,Hawkins,,,,,,,,,,2.2,2,
+Images/Hawkins/Hawkins11.jpg,Hawkins,,,,,,,,,,2.2,2,
+Images/Hawkins/Hawkins12.jpg,Hawkins,,,,,,,,,,2.2,2,
+Images/Hawkins/Hawkins13.jpg,Hawkins,,,,,,,,,,2.3,2,
+Images/Hawkins/Hawkins14.jpg,Hawkins,,,,,,,,,,2.3,2,
+Images/Hawkins/Hawkins15.jpg,Hawkins,,,,,,,,,,2.3,2,
+Images/Hawkins/Hawkins16.jpg,Hawkins,,,,,,,,,,2.3,2,
+Images/Hawkins/Hawkins17.jpg,Hawkins,,,,,,,,,,2.3,2,
+Images/Hawkins/Hawkins18.jpg,Hawkins,,,,,,,,,,2.3,2,
+Images/McNamara/McNamara1.jpg,McNamara,,,,,,,Images/Context/mm/Epcot_Center.jpg,Epcot Center,mm,3.1,3,mm
+Images/McNamara/McNamara2.jpg,McNamara,,,,,,,Images/Context/mm/Forbidden_City.jpg,Forbidden City,mm,3.1,3,mm
+Images/McNamara/McNamara3.jpg,McNamara,,,,,,,Images/Context/mm/Gateway_Arch.jpg,Gateway Arch,mm,3.1,3,mm
+Images/McNamara/McNamara4.jpg,McNamara,,,,,,,Images/Context/nat/Devil's_Tower.jpg,Devil's Tower,nat,3.1,3,nat
+Images/McNamara/McNamara5.jpg,McNamara,,,,,,,Images/Context/nat/Grand_Canyon.jpg,Grand Canyon,nat,3.1,3,nat
+Images/McNamara/McNamara6.jpg,McNamara,,,,,,,Images/Context/nat/Himalayas.jpg,Himalayas,nat,3.1,3,nat
+Images/McNamara/McNamara7.jpg,McNamara,,,,,,,,,,3.2,3,
+Images/McNamara/McNamara8.jpg,McNamara,,,,,,,,,,3.2,3,
+Images/McNamara/McNamara9.jpg,McNamara,,,,,,,,,,3.2,3,
+Images/McNamara/McNamara10.jpg,McNamara,,,,,,,,,,3.2,3,
+Images/McNamara/McNamara11.jpg,McNamara,,,,,,,,,,3.2,3,
+Images/McNamara/McNamara12.jpg,McNamara,,,,,,,,,,3.2,3,
+Images/McNamara/McNamara13.jpg,McNamara,,,,,,,,,,3.3,3,
+Images/McNamara/McNamara14.jpg,McNamara,,,,,,,,,,3.3,3,
+Images/McNamara/McNamara15.jpg,McNamara,,,,,,,,,,3.3,3,
+Images/McNamara/McNamara16.jpg,McNamara,,,,,,,,,,3.3,3,
+Images/McNamara/McNamara17.jpg,McNamara,,,,,,,,,,3.3,3,
+Images/McNamara/McNamara18.jpg,McNamara,,,,,,,,,,3.3,3,
+Images/Schlorff/Schlorff1.jpg,Schlorff,,,,,,,Images/Context/mm/Golden_Gate_Bridge.jpg,Golden Gate Bridge,mm,4.1,4,mm
+Images/Schlorff/Schlorff2.jpg,Schlorff,,,,,,,Images/Context/mm/Louvre.jpg,Louvre,mm,4.1,4,mm
+Images/Schlorff/Schlorff3.jpg,Schlorff,,,,,,,Images/Context/mm/Pentagon.jpg,Pentagon,mm,4.1,4,mm
+Images/Schlorff/Schlorff4.jpg,Schlorff,,,,,,,Images/Context/nat/Kilauea_Volcano.jpg,Kilauea Volcano,nat,4.1,4,nat
+Images/Schlorff/Schlorff5.jpg,Schlorff,,,,,,,Images/Context/nat/Lake_Tahoe.jpg,Lake Tahoe,nat,4.1,4,nat
+Images/Schlorff/Schlorff6.jpg,Schlorff,,,,,,,Images/Context/nat/Mount_Fuji.jpg,Mount Fuji,nat,4.1,4,nat
+Images/Schlorff/Schlorff7.jpg,Schlorff,,,,,,,,,,4.2,4,
+Images/Schlorff/Schlorff8.jpg,Schlorff,,,,,,,,,,4.2,4,
+Images/Schlorff/Schlorff9.jpg,Schlorff,,,,,,,,,,4.2,4,
+Images/Schlorff/Schlorff10.jpg,Schlorff,,,,,,,,,,4.2,4,
+Images/Schlorff/Schlorff11.jpg,Schlorff,,,,,,,,,,4.2,4,
+Images/Schlorff/Schlorff12.jpg,Schlorff,,,,,,,,,,4.2,4,
+Images/Schlorff/Schlorff13.jpg,Schlorff,,,,,,,,,,4.3,4,
+Images/Schlorff/Schlorff14.jpg,Schlorff,,,,,,,,,,4.3,4,
+Images/Schlorff/Schlorff15.jpg,Schlorff,,,,,,,,,,4.3,4,
+Images/Schlorff/Schlorff16.jpg,Schlorff,,,,,,,,,,4.3,4,
+Images/Schlorff/Schlorff17.jpg,Schlorff,,,,,,,,,,4.3,4,
+Images/Schlorff/Schlorff18.jpg,Schlorff,,,,,,,,,,4.3,4,
+Images/Petro/Petro1.jpg,Petro,,,,,,,Images/Context/mm/Rock_and_Roll_Hall_of_Fame.jpg,Rock and Roll Hall of Fame,mm,5.1,5,mm
+Images/Petro/Petro2.jpg,Petro,,,,,,,Images/Context/mm/Space_Needle.jpg,Space Needle,mm,5.1,5,mm
+Images/Petro/Petro3.jpg,Petro,,,,,,,Images/Context/mm/Sydney_Opera_House.jpg,Sydney Opera House,mm,5.1,5,mm
+Images/Petro/Petro4.jpg,Petro,,,,,,,Images/Context/nat/Niagra_Falls.jpg,Niagra Falls,nat,5.1,5,nat
+Images/Petro/Petro5.jpg,Petro,,,,,,,Images/Context/nat/Paria_Canyon.jpg,Paria Canyon,nat,5.1,5,nat
+Images/Petro/Petro6.jpg,Petro,,,,,,,Images/Context/nat/Red_Beach.jpg,Red Beach,nat,5.1,5,nat
+Images/Petro/Petro7.jpg,Petro,,,,,,,,,,5.2,5,
+Images/Petro/Petro8.jpg,Petro,,,,,,,,,,5.2,5,
+Images/Petro/Petro9.jpg,Petro,,,,,,,,,,5.2,5,
+Images/Petro/Petro10.jpg,Petro,,,,,,,,,,5.2,5,
+Images/Petro/Petro11.jpg,Petro,,,,,,,,,,5.2,5,
+Images/Petro/Petro12.jpg,Petro,,,,,,,,,,5.2,5,
+Images/Petro/Petro13.jpg,Petro,,,,,,,,,,5.3,5,
+Images/Petro/Petro14.jpg,Petro,,,,,,,,,,5.3,5,
+Images/Petro/Petro15.jpg,Petro,,,,,,,,,,5.3,5,
+Images/Petro/Petro16.jpg,Petro,,,,,,,,,,5.3,5,
+Images/Petro/Petro17.jpg,Petro,,,,,,,,,,5.3,5,
+Images/Petro/Petro18.jpg,Petro,,,,,,,,,,5.3,5,
+Images/Wexler/Wexler1.jpg,Wexler,,,,,,,Images/Context/mm/Taj_Mahal.jpg,Taj Mahal,mm,6.1,6,mm
+Images/Wexler/Wexler2.jpg,Wexler,,,,,,,Images/Context/mm/Tower_of_Pisa.jpg,Tower of Pisa,mm,6.1,6,mm
+Images/Wexler/Wexler3.jpg,Wexler,,,,,,,Images/Context/mm/Washington_Monument.jpg,Washington Monument,mm,6.1,6,mm
+Images/Wexler/Wexler4.jpg,Wexler,,,,,,,Images/Context/nat/Yellowstone.jpg,Yellowstone,nat,6.1,6,nat
+Images/Wexler/Wexler5.jpg,Wexler,,,,,,,Images/Context/nat/Zhangye_Danxia_Park.jpg,Zhangye Danxia Park,nat,6.1,6,nat
+Images/Wexler/Wexler6.jpg,Wexler,,,,,,,Images/Context/nat/Zion_Subway.jpg,Zion Subway,nat,6.1,6,nat
+Images/Wexler/Wexler7.jpg,Wexler,,,,,,,,,,6.2,6,
+Images/Wexler/Wexler8.jpg,Wexler,,,,,,,,,,6.2,6,
+Images/Wexler/Wexler9.jpg,Wexler,,,,,,,,,,6.2,6,
+Images/Wexler/Wexler10.jpg,Wexler,,,,,,,,,,6.2,6,
+Images/Wexler/Wexler11.jpg,Wexler,,,,,,,,,,6.2,6,
+Images/Wexler/Wexler12.jpg,Wexler,,,,,,,,,,6.2,6,
+Images/Wexler/Wexler13.jpg,Wexler,,,,,,,,,,6.3,6,
+Images/Wexler/Wexler14.jpg,Wexler,,,,,,,,,,6.3,6,
+Images/Wexler/Wexler15.jpg,Wexler,,,,,,,,,,6.3,6,
+Images/Wexler/Wexler16.jpg,Wexler,,,,,,,,,,6.3,6,
+Images/Wexler/Wexler17.jpg,Wexler,,,,,,,,,,6.3,6,
+Images/Wexler/Wexler18.jpg,Wexler,,,,,,,,,,6.3,6,
+Images/Grossman1.jpg,Grossman1,,,,,1,Grossman,,,,off,off,off
+Images/Grossman2.jpg,Grossman2,,,,,1,Grossman,,,,off,off,off
+Images/Grossman3.jpg,Grossman3,,,,,1,Grossman,,,,off,off,off
+Images/Grossman4.jpg,Grossman4,,,,,1,Grossman,,,,off,off,off
+Images/Grossman5.jpg,Grossman5,,,,,1,Grossman,,,,off,off,off
+Images/Grossman6.jpg,Grossman6,,,,,1,Grossman,,,,off,off,off
+Images/Grossman7.jpg,Grossman7,,,,,2,Grossman,,,,off,off,off
+Images/Grossman8.jpg,Grossman8,,,,,2,Grossman,,,,off,off,off
+Images/Grossman9.jpg,Grossman9,,,,,2,Grossman,,,,off,off,off
+Images/Grossman10.jpg,Grossman10,,,,,2,Grossman,,,,off,off,off
+Images/Grossman11.jpg,Grossman11,,,,,2,Grossman,,,,off,off,off
+Images/Grossman12.jpg,Grossman12,,,,,2,Grossman,,,,off,off,off
+Images/Grossman13.jpg,Grossman13,,,,,3,Grossman,,,,off,off,off
+Images/Grossman14.jpg,Grossman14,,,,,3,Grossman,,,,off,off,off
+Images/Grossman15.jpg,Grossman15,,,,,3,Grossman,,,,off,off,off
+Images/Grossman16.jpg,Grossman16,,,,,3,Grossman,,,,off,off,off
+Images/Grossman17.jpg,Grossman17,,,,,3,Grossman,,,,off,off,off
+Images/Grossman18.jpg,Grossman18,,,,,3,Grossman,,,,off,off,off
+Images/Hawkins1.jpg,Hawkins1,,,,,1,Hawkins,,,,off,off,off
+Images/Hawkins2.jpg,Hawkins2,,,,,1,Hawkins,,,,off,off,off
+Images/Hawkins3.jpg,Hawkins3,,,,,1,Hawkins,,,,off,off,off
+Images/Hawkins4.jpg,Hawkins4,,,,,1,Hawkins,,,,off,off,off
+Images/Hawkins5.jpg,Hawkins5,,,,,1,Hawkins,,,,off,off,off
+Images/Hawkins6.jpg,Hawkins6,,,,,1,Hawkins,,,,off,off,off
+Images/Hawkins7.jpg,Hawkins7,,,,,2,Hawkins,,,,off,off,off
+Images/Hawkins8.jpg,Hawkins8,,,,,2,Hawkins,,,,off,off,off
+Images/Hawkins9.jpg,Hawkins9,,,,,2,Hawkins,,,,off,off,off
+Images/Hawkins10.jpg,Hawkins10,,,,,2,Hawkins,,,,off,off,off
+Images/Hawkins11.jpg,Hawkins11,,,,,2,Hawkins,,,,off,off,off
+Images/Hawkins12.jpg,Hawkins12,,,,,2,Hawkins,,,,off,off,off
+Images/Hawkins13.jpg,Hawkins13,,,,,3,Hawkins,,,,off,off,off
+Images/Hawkins14.jpg,Hawkins14,,,,,3,Hawkins,,,,off,off,off
+Images/Hawkins15.jpg,Hawkins15,,,,,3,Hawkins,,,,off,off,off
+Images/Hawkins16.jpg,Hawkins16,,,,,3,Hawkins,,,,off,off,off
+Images/Hawkins17.jpg,Hawkins17,,,,,3,Hawkins,,,,off,off,off
+Images/Hawkins18.jpg,Hawkins18,,,,,3,Hawkins,,,,off,off,off
+Images/McNamara1.jpg,McNamara1,,,,,1,McNamara,,,,off,off,off
+Images/McNamara2.jpg,McNamara2,,,,,1,McNamara,,,,off,off,off
+Images/McNamara3.jpg,McNamara3,,,,,1,McNamara,,,,off,off,off
+Images/McNamara4.jpg,McNamara4,,,,,1,McNamara,,,,off,off,off
+Images/McNamara5.jpg,McNamara5,,,,,1,McNamara,,,,off,off,off
+Images/McNamara6.jpg,McNamara6,,,,,1,McNamara,,,,off,off,off
+Images/McNamara7.jpg,McNamara7,,,,,2,McNamara,,,,off,off,off
+Images/McNamara8.jpg,McNamara8,,,,,2,McNamara,,,,off,off,off
+Images/McNamara9.jpg,McNamara9,,,,,2,McNamara,,,,off,off,off
+Images/McNamara10.jpg,McNamara10,,,,,2,McNamara,,,,off,off,off
+Images/McNamara11.jpg,McNamara11,,,,,2,McNamara,,,,off,off,off
+Images/McNamara12.jpg,McNamara12,,,,,2,McNamara,,,,off,off,off
+Images/McNamara13.jpg,McNamara13,,,,,3,McNamara,,,,off,off,off
+Images/McNamara14.jpg,McNamara14,,,,,3,McNamara,,,,off,off,off
+Images/McNamara15.jpg,McNamara15,,,,,3,McNamara,,,,off,off,off
+Images/McNamara16.jpg,McNamara16,,,,,3,McNamara,,,,off,off,off
+Images/McNamara17.jpg,McNamara17,,,,,3,McNamara,,,,off,off,off
+Images/McNamara18.jpg,McNamara18,,,,,3,McNamara,,,,off,off,off
+Images/Petro1.jpg,Petro1,,,,,1,Petro,,,,off,off,off
+Images/Petro2.jpg,Petro2,,,,,1,Petro,,,,off,off,off
+Images/Petro3.jpg,Petro3,,,,,1,Petro,,,,off,off,off
+Images/Petro4.jpg,Petro4,,,,,1,Petro,,,,off,off,off
+Images/Petro5.jpg,Petro5,,,,,1,Petro,,,,off,off,off
+Images/Petro6.jpg,Petro6,,,,,1,Petro,,,,off,off,off
+Images/Petro7.jpg,Petro7,,,,,2,Petro,,,,off,off,off
+Images/Petro8.jpg,Petro8,,,,,2,Petro,,,,off,off,off
+Images/Petro9.jpg,Petro9,,,,,2,Petro,,,,off,off,off
+Images/Petro10.jpg,Petro10,,,,,2,Petro,,,,off,off,off
+Images/Petro11.jpg,Petro11,,,,,2,Petro,,,,off,off,off
+Images/Petro12.jpg,Petro12,,,,,2,Petro,,,,off,off,off
+Images/Petro13.jpg,Petro13,,,,,3,Petro,,,,off,off,off
+Images/Petro14.jpg,Petro14,,,,,3,Petro,,,,off,off,off
+Images/Petro15.jpg,Petro15,,,,,3,Petro,,,,off,off,off
+Images/Petro16.jpg,Petro16,,,,,3,Petro,,,,off,off,off
+Images/Petro17.jpg,Petro17,,,,,3,Petro,,,,off,off,off
+Images/Petro18.jpg,Petro18,,,,,3,Petro,,,,off,off,off
+Images/Schlorff1.jpg,Schlorff1,,,,,1,Schlorff,,,,off,off,off
+Images/Schlorff2.jpg,Schlorff2,,,,,1,Schlorff,,,,off,off,off
+Images/Schlorff3.jpg,Schlorff3,,,,,1,Schlorff,,,,off,off,off
+Images/Schlorff4.jpg,Schlorff4,,,,,1,Schlorff,,,,off,off,off
+Images/Schlorff5.jpg,Schlorff5,,,,,1,Schlorff,,,,off,off,off
+Images/Schlorff6.jpg,Schlorff6,,,,,1,Schlorff,,,,off,off,off
+Images/Schlorff7.jpg,Schlorff7,,,,,2,Schlorff,,,,off,off,off
+Images/Schlorff8.jpg,Schlorff8,,,,,2,Schlorff,,,,off,off,off
+Images/Schlorff9.jpg,Schlorff9,,,,,2,Schlorff,,,,off,off,off
+Images/Schlorff10.jpg,Schlorff10,,,,,2,Schlorff,,,,off,off,off
+Images/Schlorff11.jpg,Schlorff11,,,,,2,Schlorff,,,,off,off,off
+Images/Schlorff12.jpg,Schlorff12,,,,,2,Schlorff,,,,off,off,off
+Images/Schlorff13.jpg,Schlorff13,,,,,3,Schlorff,,,,off,off,off
+Images/Schlorff14.jpg,Schlorff14,,,,,3,Schlorff,,,,off,off,off
+Images/Schlorff15.jpg,Schlorff15,,,,,3,Schlorff,,,,off,off,off
+Images/Schlorff16.jpg,Schlorff16,,,,,3,Schlorff,,,,off,off,off
+Images/Schlorff17.jpg,Schlorff17,,,,,3,Schlorff,,,,off,off,off
+Images/Schlorff18.jpg,Schlorff18,,,,,3,Schlorff,,,,off,off,off
+Images/Wexler1.jpg,Wexler1,,,,,1,Wexler,,,,off,off,off
+Images/Wexler2.jpg,Wexler2,,,,,1,Wexler,,,,off,off,off
+Images/Wexler3.jpg,Wexler3,,,,,1,Wexler,,,,off,off,off
+Images/Wexler4.jpg,Wexler4,,,,,1,Wexler,,,,off,off,off
+Images/Wexler5.jpg,Wexler5,,,,,1,Wexler,,,,off,off,off
+Images/Wexler6.jpg,Wexler6,,,,,1,Wexler,,,,off,off,off
+Images/Wexler7.jpg,Wexler7,,,,,2,Wexler,,,,off,off,off
+Images/Wexler8.jpg,Wexler8,,,,,2,Wexler,,,,off,off,off
+Images/Wexler9.jpg,Wexler9,,,,,2,Wexler,,,,off,off,off
+Images/Wexler10.jpg,Wexler10,,,,,2,Wexler,,,,off,off,off
+Images/Wexler11.jpg,Wexler11,,,,,2,Wexler,,,,off,off,off
+Images/Wexler12.jpg,Wexler12,,,,,2,Wexler,,,,off,off,off
+Images/Wexler13.jpg,Wexler13,,,,,3,Wexler,,,,off,off,off
+Images/Wexler14.jpg,Wexler14,,,,,3,Wexler,,,,off,off,off
+Images/Wexler15.jpg,Wexler15,,,,,3,Wexler,,,,off,off,off
+Images/Wexler16.jpg,Wexler16,,,,,3,Wexler,,,,off,off,off
+Images/Wexler17.jpg,Wexler17,,,,,3,Wexler,,,,off,off,off
+Images/Wexler18.jpg,Wexler18,,,,,3,Wexler,,,,off,off,off

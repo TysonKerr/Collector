@@ -1,5 +1,0 @@
-Trial Type,Item,Max Time,Settings,Text,Shuffle
-instruct,0,user,,"<p>You will now be asked to copy certain word pairs. If you do not get 75% correct, you will be asked to repeat the block.</p> <p>Also, if you think of a pink elephant, please press the spacebar.</p>",off
-multi-trial-demo,2::5,user,,,off
-criterion-check,0,0,"""trials"": 1, ""criterion"": 0.75",,off
-instruct,0,user,,You have finished phase 1!,off
