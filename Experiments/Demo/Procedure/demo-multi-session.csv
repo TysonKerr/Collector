@@ -1,0 +1,6 @@
+Trial Type,Stim Rows,Max Time,Settings,Text,Shuffle
+instruct,0,user,,This is the first instruct trial.,off
+end-session,0,user,,"This is the first break between sessions. To continue, please go back to the login page and enter your username again.",off
+instruct,0,user,,This is the second instruct trial.,off
+end-session,0,user,90,This is the second break. This one has an enforced wait of 1 minute and 30 seconds.,off
+instruct,0,user,,This is the final instruct trial.,off

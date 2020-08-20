@@ -1,0 +1,26 @@
+#content {
+    max-width: 700px;
+    font-size: 125%;
+}
+.question {
+    margin-bottom: 2em;
+    text-align: left;
+}
+.option-list {
+    display: table;
+}
+.option-list > label {
+    display: table-row;
+    text-align: left;
+}
+.option-list > label:hover {
+    background-color: #cfd;
+}
+.option-list > label > span {
+    display: table-cell;
+    padding: 2px 4px;
+}
+.option-list input {
+    vertical-align: baseline;
+    margin-bottom: 20px;
+}

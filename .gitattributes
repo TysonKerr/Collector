@@ -1,0 +1,4 @@
+.gitignore export-ignore
+.gitattributes export-ignore
+jquery.js linguist-vendored=false
+phpbrowscap/* linguist-vendored

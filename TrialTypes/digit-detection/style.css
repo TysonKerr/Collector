@@ -1,0 +1,7 @@
+.trial-container:not(.current) {
+    display: none;
+}
+
+.trial-container {
+    font-size: 150%;
+}

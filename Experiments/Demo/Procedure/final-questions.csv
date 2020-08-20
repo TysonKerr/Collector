@@ -1,0 +1,5 @@
+Trial Type,Stim Rows,Max Time,Settings,Text,Shuffle,Col Name,Option Text,Options
+radio,0,user,,"Did the experiment go smoothly or were there problems? (Note: Your compensation will not depend on your answer below, so please be honest.)!!!",off,exp_ran_smoothly,It went smoothly.|There were minor problems.|There were significant problems. I don't think my responses should be included in the data.,Smooth|MinorBumps|ExcludeMe
+checkbox,0,user,,Which of the following problems did you have?,off,exp_problems,Sometimes a page wouldn't load and I would have to reload the page.|Sometimes the page loaded but there was nothing there.|During the experiment I experienced problems with my internet connection.|Everything ran smoothly.,reload|blank page|internet connectivity problems|none
+textbox,0,user,,Were you doing anything else while participating in this study? PLEASE BE HONEST--your compensation will not depend on your answer to this question.,off,exp_distractions,,
+textbox,0,user,,"Is there anything you would like the experimenters to know? For instance, was the task too difficult, boring, etc?",off,exp_comments,,

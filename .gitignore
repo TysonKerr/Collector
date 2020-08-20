@@ -1,7 +1,4 @@
-Data/*
-!Data/Getdata/*
-!Data/index.php
-!Data/meta.php
-!Data/.htaccess
+/Data/*
 *.~lock.*
-Experiment/p.txt
+/PHP/admin/pass.txt
+/PHP/admin/sess/*

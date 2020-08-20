@@ -1,0 +1,8 @@
+#content {
+    margin: auto;
+    max-width: 700px;
+    line-height: 1.5em;
+    font-size: 125%;
+    display: inline-block;
+    text-align: left;
+}

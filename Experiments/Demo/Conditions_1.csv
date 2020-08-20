@@ -1,0 +1,6 @@
+Stimuli,Procedure,Name
+,demo-simple.csv,simple
+demo-stim.csv,demo-filter.csv,age filter
+demo-stim.csv,demo-post-trials.csv,post trials
+,demo-multi-session.csv,multi-session
+demo-words.csv,demo-digit-detection.csv,digit-detection

@@ -1,6 +1,0 @@
-Number,Stimuli,Procedure,Condition Description,Condition Notes
-1,demo-stim.csv,demo-proc.csv,criterion loop,demo1
-2,demo-stim.csv,demo-multi-trial-proc.csv,multi-trial,demo2
-3,demo-stim.csv,demo-filter.csv,age filter,demo3
-4,demo-stim.csv,demo-ospan.csv,ospan,demo4
-5,demo-stim.csv,demo-multi-items.csv,multi-item,demo5

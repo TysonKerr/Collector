@@ -1,0 +1,5 @@
+Trial Type,Stim Rows,Max Time,Settings,Text,Shuffle,Post 1 Trial Type,Post 1 Stim Rows,Post 2 Trial Type
+instruct,0,user,,Lets look at some trials.,off,,,
+copy,2,user,,,yep,jol,*inherit,
+copy,3,user,,,yep,jol,*inherit,
+instruct,0,user,,Make sure to check the output.,off,,,

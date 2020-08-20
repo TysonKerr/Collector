@@ -1,8 +1,0 @@
-Trial Type,Item,Max Time,Settings,Text,Shuffle
-instruct,0,user,,"You will now be asked to copy certain word pairs. If you do not get 75% correct, you will be asked to repeat the block.",off
-copy,2,user,,,yep
-copy,3,user,,,yep
-copy,4,user,,,yep
-copy,5,user,,,yep
-criterion-check,0,0,"""trials"": 4, ""criterion"": 0.75",,off
-instruct,0,user,,You have finished phase 1!,off

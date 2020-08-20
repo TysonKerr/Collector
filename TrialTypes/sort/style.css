@@ -1,0 +1,36 @@
+.topMsg {
+    display: inline-block;
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+ul {
+    display: inline-block;
+    list-style-type: none;
+}
+
+#sortList {
+    vertical-align: top;
+    counter-reset: listSort;
+    background-color: #f0f0f0;
+    border: 2px solid #e0e0e0;
+    padding: 6px;
+}
+
+#sortList li {
+    margin: 6px;
+    background-color: #DDD;
+    border: 2px solid #AAA;
+    padding: 4px 45px 4px 8px;
+    cursor: move;
+    text-align: left;
+}
+
+#sortList li:not(.ui-sortable-placeholder)::before {
+    counter-increment: listSort;
+    content: counter(listSort)". ";
+}
+
+.listContainer {
+    text-align: center;
+}

@@ -1,5 +1,0 @@
-Type,Question,1,2,3,4,5,6
-Radio,"Did the experiment go smoothly or were there problems? (Note: Your compensation will not depend on your answer below, so please be honest.)!!!",Smooth|It went smoothly.,MinorBumps|There were minor problems.,ExcludeMe|There were significant problems. I don't think my responses should be included in the data.,,,
-Checkbox,Which of the following problems did you have?,reload|Sometimes a page wouldn't load and I would have to reload the page,blank page|Sometimes the page loaded but there was nothing there,internet connectivity problems|During the experiment I experienced problems with my internet connection,none|Everything ran smoothly,,
-Text,Were you doing anything else while participating in this study? PLEASE BE HONEST--your compensation will not depend on your answer to this question.,,,,,,
-Text,"Is there anything you would like the experimenters to know? For instance, was the task too difficult, boring, etc?",,,,,,

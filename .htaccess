@@ -1,0 +1,40 @@
+Options -Indexes
+
+RewriteEngine on
+
+# redirect ...//... to .../...
+RewriteCond %{THE_REQUEST} \s([^?]*)/{2,}(.*)\s
+RewriteRule (.*) %1/%2 [R=302,END,E=A:success,E=B:%1,E=C:%2]
+
+# direct data to data/
+Rewriterule ^data$ %{REQUEST_URI}/ [NC,R=302,END,QSA]
+
+# redirect data/ to PHP/data.php
+RewriteRule ^data/?(.*)$ PHP/data/$1 [NC,END]
+
+# redirect Exp to Exp/login/
+RewriteCond Experiments/$1/consent.pdf -F
+RewriteRule ^([^/]+)$ %{REQUEST_URI}/login/ [L,R=302]
+
+# redirect Exp/ to Exp/login/
+RewriteCond Experiments/$1/consent.pdf -F
+RewriteRule ^([^/]+)/$ %{REQUEST_URI}login/ [L,R=302]
+
+# redirect Exp/login to Exp/login/
+RewriteCond Experiments/$1/consent.pdf -F
+RewriteCond $2 !consent\.pdf
+RewriteRule ^([^/]+)/([^/]+)$ %{REQUEST_URI}/ [L,R=302]
+
+# route Exp/data/ to PHP/data/ with D_EXP set
+RewriteCond Experiments/$1/consent.pdf -F
+RewriteRule ^([^/]+)/data/(.*)$ PHP/data/$2 [END,NC,QSA,E=D_EXP:$1]
+
+# route Exp/login/ to init.php with EXP and PAGE set
+RewriteCond Experiments/$1/consent.pdf -F
+RewriteCond Pages/$2.php -F
+RewriteRule ^([^/]+)/([^/]+)/$ PHP/init.php [END,QSA,E=EXP:$1,E=PAGE:$2]
+
+# route Exp/consent.pdf to Experiments/Exp/consent.pdf
+RewriteCond Experiments/$1/consent.pdf -F
+RewriteCond Pages/$2.php !-F
+RewriteRule ^([^/]+)/(.+/?)$ Experiments/$1/$2 [END,QSA]

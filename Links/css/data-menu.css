@@ -1,0 +1,182 @@
+html, body, #Collector-content {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    background-color: #bbb;
+    text-align: center;
+}
+
+#Collector-content {
+    vertical-align: top;
+}
+
+#menu-header {
+    background-color: #fff;
+}
+
+#controls {
+    background-color: #fff;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #555;
+}
+
+#data-columns-header {
+    display: block;
+    font-size: 180%;
+    color: #069;
+    font-weight: bold;
+}
+
+#data-columns-header > span:first-child input {
+    transform: scale(1.8);
+}
+
+.data-menu-block {
+    display: inline-block;
+    padding: 10px;
+    text-align: left;
+    background-color: #fff;
+    border: 2px solid #555;
+    box-sizing: border-box;
+    vertical-align: top;
+    min-width: 300px;
+}
+
+.col-group {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.col-list {
+    display: grid;
+}
+
+.col-group-header {
+    font-weight: bold;
+    font-size: 130%;
+    color: #069;
+    display: block;
+}
+
+.col-group-header.sub-header {
+    font-size: 110%;
+}
+
+.col-group-header input {
+    transform: scale(1.5);
+}
+
+.col-group-header.sub-header input {
+    transform: scale(1.3);
+}
+
+label:hover {
+    background-color: #afc;
+}
+
+input[type='checkbox'] {
+    vertical-align: middle;
+}
+
+#data-columns input {
+    margin-right: 8px;
+}
+
+.id-list {
+    line-height: 1em;
+    height: 1em;
+    overflow-y: auto;
+}
+
+.user-group-header {
+    display: block;
+}
+
+.user-list {
+    display: table;
+    width: 100%;
+}
+
+.user-list > label {
+    display: table-row;
+}
+
+.user-list > label > span {
+    display: table-cell;
+    padding: 0px 8px;
+    white-space: nowrap;
+}
+
+.user-list > label.user-group-row > span:nth-child(2) {
+    position: relative;
+}
+
+.user-list > label > span:nth-child(6) {
+    text-align: right;
+}
+
+.user-group-row > span > span {
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #069;
+    font-weight: bold;
+}
+
+.user-group-1 {
+    font-size: 130%;
+}
+
+.user-group-1 input {
+    transform: scale(1.3);
+    margin-left: 10px;
+}
+
+.user-group-2 {
+    font-size: 150%;
+}
+
+.user-group-2 input {
+    transform: scale(1.5);
+    margin-left: 5px;
+}
+
+.user-group-3 {
+    font-size: 180%;
+}
+
+.user-group-3 input {
+    transform: scale(1.8);
+}
+
+.user-row input {
+    margin-left: 15px;
+}
+
+#logout-form {
+    display: inline;
+    font-size: 40%;
+}
+
+#logout-form button {
+    vertical-align: super;
+}
+
+#data-preview {
+    border-collapse: collapse;
+    background-color: white;
+}
+
+#data-preview td {
+    border: 1px solid black;
+    padding: 1px 4px;
+}
+
+#data-preview div {
+    white-space: nowrap;
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
