@@ -29,12 +29,6 @@
 
 function has_fullscreened() {
     return (screen.width - window.innerWidth) <= 50;
-    
-    if (!document.fullscreenEnabled) return true; // cant force them, dont stop them
-    
-    if (document.fullscreenElement !== null) return true;
-    
-    return false;
 }
 
 function validate_fullscreen() {

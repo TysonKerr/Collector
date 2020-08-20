@@ -1,7 +1,6 @@
 <p>
     You did not comply with the task instructions and thus cannot continue with
-    the experiment. You will receive $0.50 for the tutorial, and we will evaluate
-    your data and time spent to see if you qualify for any additional payments.
+    the experiment.
 </p>
 
 <p>
@@ -9,11 +8,13 @@
     experimenter and someone will examine the data and get back to you.
 </p>
 
+<?php if ($_CONFIG->mTurk_mode): ?>
 <p>
-    To complete the HIT and receive your $0.50, please submit the verification
+    To complete the HIT and receive partial payment, please submit the verification
     code below:
 </p>
 
 </p>
-    DPL1E2MA-<?= $_SESSION['ID'] ?>
+    g9wfs0dl-<?= $_SESSION['ID'] ?>
 </p>
+<?php endif; ?>
