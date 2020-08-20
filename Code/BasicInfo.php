@@ -14,6 +14,15 @@
         min-width: 400px;
         /*Make the flexchild, form, fit the basic info content size*/
     }
+    
+    #age-warning {
+        margin-left: 2.5em;
+        font-size: 125%;
+        color: #600;
+        width: 400px;
+    }
+    
+    .invis { visibility: hidden; }
 </style>
 <form id="content" class="basicInfo" name="Demographics"
       action="<?= $_PATH->get('Basic Info Record') ?>" method="post" autocomplete="off">
@@ -38,6 +47,18 @@
             </label>
         </section>
         
+        
+        <section>
+            <label>
+                <h3>Birthday</h3>
+                <input name="Birthday"type="date"
+                value="" autocomplete="off" required/>
+            </label>
+        </section>
+        
+        <div id="age-warning" class="invis">
+            Your age and birthday do not match up. Are you sure you entered them correctly?
+        </div>
         
         <section>
             <label>
@@ -101,23 +122,53 @@
         </section>
         
         
-        <section class="consent">
-            <legend><h3>Informed Consent</h3></legend>
-            <textarea readonly>Are you ready for some science?</textarea>
-            <label>
-                <span class="shim">Check this box if you have read, understand, 
-                    and agree to the Informed Consent above.</span>
-                <input type="checkbox" name="consent" required/>
-            </label>
-        </section>
-        
-        
         <section>
-            <button class="collectorButton">Submit Basic Info</button>
+            <button id="submit-button" class="collectorButton">Submit Basic Info</button>
         </section>
         
     </fieldset>
 </form>
+
+<script>
+"use strict";
+
+var get_input = function(name) {
+    return document.querySelector(`input[name='${name}']`);
+};
+
+var get_birthday_bounds = function(age) {
+    let date = new Date();
+    date.setFullYear(date.getFullYear() - age - 1);
+    let min = date.valueOf();
+    date.setFullYear(date.getFullYear() + 1);
+    let max = date.valueOf();
+    return [min, max];
+}
+
+var check_age_and_birthday = function() {
+    let age = get_input("Age").value - 0;
+    let birthday = get_input("Birthday").value;
+    let birthday_timestamp = Date.parse(birthday);
+    
+    if (Number.isNaN(birthday_timestamp) || Number.isNaN(age)) return;
+    
+    let birthday_bounds = get_birthday_bounds(age);
+    let birthday_within_bounds = (birthday_timestamp >= birthday_bounds[0]
+        && birthday_timestamp <= birthday_bounds[1]);
+    let warning = document.getElementById("age-warning");
+    let button = document.getElementById("submit-button");
+    
+    if (birthday_within_bounds) {
+        warning.classList.add("invis");
+        button.disabled = false;
+    } else {
+        warning.classList.remove("invis");
+        button.disabled = true;
+    }
+};
+
+document.addEventListener("input", check_age_and_birthday);
+</script>
 
 <?php
     require $_PATH->get('Footer');

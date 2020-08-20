@@ -25,21 +25,3 @@ function getTools ($dir = '.') {
     }
     return $tools;
 }
-
-function showDropdown ($options) {
-    //
-}
-
-function confirmLogin () {
-    if (!isset($_SESSION)) {
-        session_start();
-    }
-    global $_SESSION;
-    
-    if ($_SESSION['admin']['status'] === 'loggedIn') {
-        continue;
-    } else {
-        header('Location: ./');
-        exit;
-    }
-}

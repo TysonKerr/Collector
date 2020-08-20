@@ -1,0 +1,14 @@
+#content {
+    width:auto;
+    min-width: 400px;
+    /*Make the flexchild, form, fit the basic info content size*/
+}
+
+#age-warning {
+    margin-left: 2.5em;
+    font-size: 125%;
+    color: #600;
+    width: 400px;
+}
+
+.invis { visibility: hidden; }

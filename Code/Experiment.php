@@ -5,70 +5,12 @@
  */
 
     require 'initiateCollector.php';
+    require 'experimentFunctions.php';
 
     // this only happens once, so that refreshing the page doesn't do anything, and recording a new line of data is the only way to update the timestamp
     if (!isset($_SESSION['Timestamp'])) {
         $_SESSION['Timestamp'] = microtime(true);
     }
-    
-    
-    function recordTrial($extraData = array(), $exitIfDone = true, $advancePosition = true) {
-        global $_CONFIG, $_PATH;
-        #### setting up aliases (for later use)
-        $currentPos   =& $_SESSION['Position'];
-        $currentTrial =& $_SESSION['Trials'][$currentPos];
-
-        #### Calculating time difference from current to last trial
-        $oldTime = $_SESSION['Timestamp'];
-        $_SESSION['Timestamp'] = microtime(true);
-        $timeDif = $_SESSION['Timestamp'] - $oldTime;
-        
-        #### Writing to data file
-        $data = array(  'Username'              =>  $_SESSION['Username'],
-                        'ID'                    =>  $_SESSION['ID'],
-                        'ExperimentName'        =>  $_CONFIG->experiment_name,
-                        'Session'               =>  $_SESSION['Session'],
-                        'Trial'                 =>  $_SESSION['Position'],
-                        'Date'                  =>  date("c"),
-                        'TimeDif'               =>  $timeDif,
-                        'Condition Number'      =>  $_SESSION['Condition']['Number'],
-                        'Stimuli File'          =>  $_SESSION['Condition']['Stimuli'],
-                        'Order File'            =>  $_SESSION['Condition']['Procedure'],
-                        'Condition Description' =>  $_SESSION['Condition']['Condition Description'],
-                        'Condition Notes'       =>  $_SESSION['Condition']['Condition Notes']
-                      );
-        foreach ($currentTrial as $category => $array) {
-            $data += AddPrefixToArray($category . '*', $array);
-        }
-        
-        if (!is_array($extraData)) {
-            $extraData = array($extraData);
-        }
-        foreach ($extraData as $header => $datum) {
-            $data[$header] = $datum;
-        }
-        
-        $writtenArray = arrayToLine($data, $_PATH->get('Experiment Output'));                                       // write data line to the file
-        ###########################################
-
-        // progresses the trial counter
-        if ($advancePosition) {
-            $currentPos++;
-            $_SESSION['PostNumber'] = 0;
-        }
-
-        // are we done with the experiment? if so, send to finalQuestions.php
-        if ($exitIfDone) {
-            $item = $_SESSION['Trials'][$currentPos]['Procedure']['Item'];
-            if ($item == 'ExperimentFinished') {
-                $_SESSION['finishedTrials'] = true;             // stops people from skipping to the end
-                header('Location: ' . $_PATH->get('Final Questions Page'));
-                exit;
-            }
-        }
-        return $writtenArray;
-    }
-
 
     // setting up easier to use and read aliases(shortcuts) of $_SESSION data
     $condition      =& $_SESSION['Condition'];
@@ -278,6 +220,14 @@
 </div>
     
 <?php
+    // to stop manual session saving, comment out the next 5 lines
+    $session_data = json_encode($_SESSION);
+    $filename = __DIR__ . '/../Data/json_copies/' . $_SESSION['Username'] . '.json';
+    $dir = dirname($filename);
+    if (!is_dir($dir)) mkdir($dir, 0777, true);
+    file_put_contents($filename, $session_data);
+    // to stop manual session saving, comment out lines to here
+
     require $_PATH->get('Footer');
     
     ob_end_flush();

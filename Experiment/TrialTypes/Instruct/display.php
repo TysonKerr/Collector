@@ -15,8 +15,8 @@
         $text = $cue;
     }
 ?>
-<div><?php echo $text; ?></div>
+<div style="font-size: 150%;"><?php echo $text; ?></div>
 
-<div class="textright">
+<div class="textcenter">
     <button class="collectorButton collectorAdvance" id="FormSubmitButton">Next</button>
 </div>

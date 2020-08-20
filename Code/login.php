@@ -13,12 +13,46 @@
     $title = 'Preparing the Experiment';
     require $_PATH->get('Header');
     
+    echo '<style> #flexBody { display: block; } </style>';
+    
     
     #### Grabbing username and condition from $_GET
     // cleaning characters that wouldn't write to a filename
     $bad_username = filter_input(INPUT_GET, 'Username', FILTER_SANITIZE_EMAIL);
     $username = str_replace(array( '/', '\\', '?', '%', '*', ':', '|', '"', '<', '>' ), '', $bad_username );
     $selectedCondition = filter_input(INPUT_GET, 'Condition', FILTER_SANITIZE_STRING);
+    $condition_type = filter_input(INPUT_GET, 'c');
+    if ($condition_type === false or $condition_type === null) $condition_type = '1';
+    
+    if ($_CONFIG->anonymize_names) {
+        $speed = [];
+        preg_match('/speed-([0-9.]+)$/', $username, $speed);
+        $username_end = count($speed) > 1 ? $speed[0] : '';
+        $username = hash('sha1', $username);
+        $username = substr($username, 0, 8);
+        $username .= $username_end;
+    }
+    
+    check_eligibility($username);
+    
+    $json_filename = __DIR__ . '/../Data/json_copies/' . $username . '.json';
+    
+    if (is_file($json_filename)) {
+        $session_data_json = file_get_contents($json_filename);
+        $session_data      = json_decode($session_data_json, true);
+        
+        if (isset($session_data['Timestamp']) and is_numeric($_CONFIG->max_relogin_time)) {
+            if (time() - $session_data['Timestamp'] > $_CONFIG->max_relogin_time) {
+                header("Location: end.php");
+                exit;
+            }
+        }
+        
+        $_SESSION = $session_data;
+        
+        header("Location: Experiment.php");
+        exit;
+    }
     
     
     
@@ -74,6 +108,7 @@
     if ($sessionFilename == true) {              // this file will only exist if this username has completed a session successfully
         $pastSession   = fopen($sessionFilename, 'r');
         $loadedSession = fread($pastSession, filesize($sessionFilename));
+        fclose($pastSession);
         $sessionData   = json_decode($loadedSession, true);
         // Load old session info
         $_SESSION = NULL;                       // get rid of current session in memory
@@ -98,7 +133,7 @@
         // Overwrite values that need to be updated
         $outputFile = 
             'Output_Session' . 
-            $_SESION['Session'] . '_' . 
+            $_SESSION['Session'] . '_' . 
             $_SESSION['Username'] . '_' . 
             $_SESSION['ID'] .
             '.csv';
@@ -142,7 +177,8 @@
         $errors['Details'][] = "No '{$_PATH->conditions}' found.";
     }
     // does the condition file have the required headers?
-    $Conditions = GetFromFile($_PATH->get('Conditions'),  false);   // Loading conditions info
+    $condition_file = $condition_type === '2' ? '_2' : '';
+    $Conditions = GetFromFile($_PATH->get('Experiment') . "/Conditions$condition_file.csv", false);   // Loading conditions info
     $errors = keyCheck($Conditions, 'Number'    , $errors, $_PATH->get('Conditions'));
     $errors = keyCheck($Conditions, 'Stimuli'   , $errors, $_PATH->get('Conditions'));
     $errors = keyCheck($Conditions, 'Procedure' , $errors, $_PATH->get('Conditions'));
@@ -151,7 +187,7 @@
     
     #### Code to automatically choose condition assignment
     $_SESSION['Condition'] = array();
-    $Conditions = GetFromFile($_PATH->get('Conditions'),  false);   // Loading conditions info
+    $Conditions = GetFromFile($_PATH->get('Experiment') . "/Conditions$condition_file.csv", false);   // Loading conditions info
     $logFile    = $_PATH->get('Counter', 'relative', $_CONFIG->login_counter_file);
     if ($selectedCondition == 'Auto') {
         if (!is_dir($_PATH->get('Counter Dir'))) {                                  // create the 'Counter' folder if it doesn't exist
@@ -419,17 +455,20 @@
         }
     }
     
+    $proc_generator = $_PATH->get('Procedure Dir') . '/generator.php';
+    
+    if (is_file($proc_generator)) {
+        require $proc_generator;
+        $cleanProcedure = generate_proc($cleanProcedure);
+    }
+    
     $procedure = multiLevelShuffle($cleanProcedure);
     $procedure = shuffle2dArray($procedure, $_CONFIG->stop_at_login);
     
     $_SESSION['Procedure'] = $procedure;
     
-    // Load entire experiment into $Trials[1-X] where X is the number of trials
-    $Trials = array(0=> 0);
-    $procedureLength = count($procedure);
-    for ($count=2; $count<$procedureLength; $count++) {
-        // $Trials[$count-1] = makeTrial($procedure[$count]['Item']);
-        $items = rangeToArray($procedure[$count]['Item']);
+    $get_stim = function($item, $stimuli) {
+        $items = rangeToArray($item);
         $stim = array();
         foreach ($items as $item) {
             if (isset($stimuli[$item]) and is_array($stimuli[$item])) {
@@ -444,8 +483,35 @@
             }
         }
         foreach ($stim as $column => $valueArray) {
-            $Trials[$count-1]['Stimuli'][$column] = implode('|', $valueArray);
+            $stim[$column] = implode('|', $valueArray);
         }
+        
+        return $stim;
+    };
+    
+    // Load entire experiment into $Trials[1-X] where X is the number of trials
+    $Trials = array(0=> 0);
+    $procedureLength = count($procedure);
+    for ($count=2; $count<$procedureLength; $count++) {
+        // $Trials[$count-1] = makeTrial($procedure[$count]['Item']);
+        $item_0_stim = $get_stim($procedure[$count]['Item'], $stimuli);
+        
+        foreach ($item_0_stim as $col => $val) {
+            $Trials[$count-1]['Stimuli'][$col] = $val;
+        }
+        
+        $i = 2;
+        
+        while (isset($procedure[$count]["Item_$i"])) {
+            $stim = $get_stim($procedure[$count]["Item_$i"], $stimuli);
+            
+            foreach ($stim as $col => $val) {
+                $Trials[$count-1]['Stimuli']["{$col}_{$i}"] = $val;
+            }
+            
+            ++$i;
+        }
+        
         // $Trials[$count-1]['Stimuli']    = $stimuli[ ($procedure[$count]['Item']) ];         // adding 'Stimuli', as an array, to each position of $Trials
         $Trials[$count-1]['Procedure']  = $procedure[$count];                               // adding 'Procedure', as an array, to each position of $Trials
         $Trials[$count-1]['Response']   = $allColumnsOutput;

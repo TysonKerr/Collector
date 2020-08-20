@@ -46,24 +46,56 @@ function addColumn(array &$array, $column, $value = '')
  */
 function arrayToLine(array $data, $filename, $delim = null, $encodeToWin = true)
 {
-    // set delimiter
-    if (null === $delim) {
-        if (isset($_SESSION['OutputDelimiter'])) {
-            $delim = $_SESSION['OutputDelimiter'];
-        } else {
-            $delim = ',';
-        }
-    }
     // convert encoding
     foreach ($data as &$datum) {
-        $datum = whitespaceToSpace($datum);
         if ($encodeToWin) {
             $datum = convertEncoding($datum, 'Windows-1252');
         }
     }
     unset($datum);
-    // write to file
-    return writeLineToFile($data, $filename, $delim);
+    
+    $badChars = array("\r", "\n", "\t");
+    
+    $keys = array_keys($data);
+    $data = str_replace($badChars, ' ', $data);
+    
+    if (!is_file($filename)) {
+        $dir = dirname($filename);
+        
+        if (!is_dir($dir)) mkdir($dir, 0777, true);
+        
+        $fileResource = fopen($filename, 'w');
+        fputcsv($fileResource, $keys);
+        fputcsv($fileResource, $data);
+        fclose( $fileResource);
+        
+    } else {
+        $fileResource = fopen($filename, 'r+');
+        $headers = array_flip(fgetcsv($fileResource));
+        $newHeaders = array_diff_key(array_flip($keys), $headers);
+        
+        if ($newHeaders !== array()) {
+            $headers = $headers+$newHeaders;
+            $oldData = stream_get_contents($fileResource);
+            rewind($fileResource);
+            fputcsv($fileResource, array_keys($headers));
+            fwrite($fileResource, $oldData);
+        }
+        
+        fseek($fileResource, 0, SEEK_END);
+        $rowSorted = array();
+        
+        foreach ($headers as $col => $nothing) {
+            if (isset($data[$col])) {
+                $rowSorted[$col] = $data[$col];
+            } else {
+                $rowSorted[$col] = '';
+            }
+        }
+        
+        fputcsv($fileResource, $rowSorted);
+        fclose($fileResource);
+    }
 }
 /**
  * Converts all whitespace in a string to a single space.
@@ -121,6 +153,7 @@ function writeLineToFile(array $array, $filename, $delim = ',')
         $file = fForceOpen($filename, "wb");
         fputcsv($file, array_keys($array), $delim);
         fputcsv($file, $array, $delim);
+        fclose($file);
     } else {
         // file already exists, need to merge headers before writing
         $data = readCsv($filename, $delim);
@@ -342,7 +375,7 @@ function display2dArray(array $array, $nonArrayCol = false)
     // format array and extract columns
     if ($nonArrayCol == false) {
         $i = 0;
-        while (is_scalar($array[$i])) {
+        while (isset($array[$i]) and is_scalar($array[$i])) {
             unset($array[$i]);
             $i++;
         }
@@ -1348,4 +1381,156 @@ function vimeoUrlCleaner($url)
 function isLocal($path)
 {
     return !filter_var($path, FILTER_VALIDATE_URL);
+}
+
+function save_extra_metadata($username, $data) {
+    $filename = get_metadata_filename();
+    $dir = dirname($filename);
+    
+    if (!is_dir($dir)) mkdir($dir, 0777, true);
+    
+    if (!is_file($filename)) {
+        $handle = fopen($filename, 'w');
+        fputcsv($handle, ['Username', 'Field', 'Value']);
+    } else {
+        $handle = fopen($filename, 'a');
+    }
+    
+    foreach ($data as $key => $value) {
+        fputcsv($handle, [$username, $key, $value]);
+    }
+    
+    fclose($handle);
+    get_all_metadata(true); // reset metadata
+}
+
+function get_metadata_filename() {
+    return dirname(__DIR__) . '/Data/metadata.csv';
+}
+
+function get_metadata($username) {
+    $metadata = get_all_metadata();
+    return isset($metadata[$username])
+         ? $metadata[$username]
+         : false;
+}
+
+function get_all_metadata($reset = false) {
+    static $data = null;
+    
+    if ($reset) {
+        $data = null;
+        return;
+    }
+    
+    if ($data === null) {
+        $data = [];
+        $filename = get_metadata_filename();
+        
+        if (is_file($filename)) {
+            $meta = getFromFile($filename, false);
+            $headers = ['Username' => true];
+
+            foreach ($meta as $row) {
+                $user = $row['Username'];
+                $field = $row['Field'];
+                $val = $row['Value'];
+                
+                if (!isset($data[$user])) {
+                    $data[$user] = ['Username' => $user];
+                }
+                
+                $data[$user][$field] = $val;
+                $headers[$field] = true;
+            }
+
+            foreach ($data as $user => $user_data) {
+                $data[$user] = SortArrayLikeArray($user_data, $headers);
+            }
+        }
+    }
+    
+    return $data;
+}
+
+function check_eligibility($username) {
+    $filename = __DIR__ . '/../Experiment/eligibility.php';
+    
+    if (!is_file($filename)) return;
+    
+    $data = get_metadata($username);
+    
+    if ($data === false) return;
+    
+    require $filename;
+    
+    if (!eligibility_test($data)) {
+        redirect('Code/Ineligible.php');
+    }
+}
+
+function redirect($path_from_root) {
+    $path = get_url_to_root() . "/$path_from_root";
+    header("Location: $path");
+    exit;
+}
+
+function get_url_to_root() {
+    $root = dirname(__DIR__);
+    $cd = getcwd();
+    $url_to_root = '.';
+    
+    while ($cd !== $root) {
+        $cd = dirname($cd);
+        $url_to_root .= '/..';
+    }
+    
+    return $url_to_root;
+}
+
+function invert_2d_array($arr) {
+    $output = [];
+    
+    foreach ($arr as $i => $vals) {
+        foreach ($vals as $j => $val) {
+            $output[$j][$i] = $val;
+        }
+    }
+    
+    return $output;
+}
+
+function link_file($filename) {
+    $path = get_url_to_file($filename);
+    $m = filemtime($filename);
+    $ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+    $v_path = "$path?v=$m";
+    
+    if ($ext === 'js') {
+        return "<script src='$v_path'></script>";
+    } else if ($ext === 'css') {
+        return "<link rel='stylesheet' href='$v_path'>";
+    } else {
+        return $path;
+    }
+}
+
+function get_url_to_file($filename) {
+    $path_to_root = dirname(__DIR__);
+    $url_to_root = get_url_to_root();
+    $realpath = realpath($filename); // in case it is a relative path
+    
+    if (!$realpath) trigger_error("Filename $filename not a real file", E_USER_ERROR);
+    
+    return $url_to_root . str_replace([$path_to_root, '\\'], ['', '/'], $realpath);
+}
+
+function start_session() {
+    $save_path = dirname(__DIR__) . '/Data/sess';
+    
+    if (!is_dir($save_path)) mkdir($save_path, 0777, true);
+    
+    session_save_path($save_path);
+    ini_set('session.gc_probability', 1);
+    return session_start();
 }

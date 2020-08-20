@@ -11,6 +11,9 @@
 
     // write user demographics data to demographics file
     arrayToLine($data, $_PATH->demographics_data);
+    save_extra_metadata($_SESSION['Username'], $_POST);
+    
+    check_eligibility($_SESSION['Username']);
     
     if ($_CONFIG->run_instructions) {
         $next = $_PATH->get('Instructions Page');

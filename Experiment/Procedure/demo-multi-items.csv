@@ -1,0 +1,7 @@
+Trial Type,Item,Item_2,Max Time,Settings,Text,Shuffle,AdvShuffle; Target Item_2
+instruct,0,0,user,,"You will now be asked to study certain word pairs. Both of the words in each pair come from the ""Answer"" column of the stimuli file.",off,off
+study-answer-pair,2,6,user,,,yep,yep
+study-answer-pair,3,7,user,,,yep,yep
+study-answer-pair,4,8,user,,,yep,yep
+study-answer-pair,5,9,user,,,yep,yep
+instruct,0,0,user,,You have finished this demo!,off,off

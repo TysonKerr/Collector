@@ -2,12 +2,12 @@
     ini_set('auto_detect_line_endings', true);              // fixes problems reading files saved on mac
     require 'getdataFunctions.php';
     
-    if( $_CONFIG->password === '' ) exit( 'GetData has not been enabled. Please enter a password in the Settings file in your experiment folder.' );
-    
     $_PATH->loadDefault('Current Data', $_CONFIG->experiment_name . '-Data');
     
     // filter user input before using
     $POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+    
+    if ($POST === null) $POST = [];
     
     #### Column Prefixes ####
     $expPrefix              = 'Exp_';
@@ -28,28 +28,28 @@
     // their output in later sessions or different conditions
     $extraFileMeta = array(
          'Demographics'     => array(
-             'fileName'         => pathinfo($_PATH->demographics_data, PATHINFO_FILENAME)
+             'fileName'         => pathinfo($_PATH->get('demographics_data'), PATHINFO_FILENAME)
             ,'Prefix'           => $demographicsPrefix
             ,'Scope'            => 'Experiment' )
         ,'Final_Questions'  => array(
-             'fileName'         => pathinfo($_PATH->final_questions_data, PATHINFO_FILENAME)
+             'fileName'         => pathinfo($_PATH->get('final_questions_data'), PATHINFO_FILENAME)
             ,'Prefix'           => $finalQuestionsPrefix
             ,'Scope'            => 'Condition' )
         ,'Status_Begin'     => array(
-             'fileName'         => pathinfo($_PATH->status_begin_data, PATHINFO_FILENAME)
+             'fileName'         => pathinfo($_PATH->get('status_begin_data'), PATHINFO_FILENAME)
             ,'Prefix'           => $statusBeginPrefix
             ,'Scope'            => 'ID' )
         ,'Status_End'       => array(
-             'fileName'         => pathinfo($_PATH->status_end_data, PATHINFO_FILENAME)
+             'fileName'         => pathinfo($_PATH->get('status_end_data'), PATHINFO_FILENAME)
             ,'Prefix'           => $statusEndPrefix
             ,'Scope'            => 'ID' )
         ,'Instructions'     => array(
-             'fileName'         => pathinfo($_PATH->instructions_data, PATHINFO_FILENAME)
+             'fileName'         => pathinfo($_PATH->get('instructions_data'), PATHINFO_FILENAME)
             ,'Prefix'           => $instructionsPrefix
             ,'Scope'            => 'Condition' )
     );
     
-    if( !isset($POST['Password']) AND count( $POST ) > 0 ) {
+    if(count($POST) > 0) {
         foreach( $extraFileMeta as $category => $fileMeta ) {
             if( !isset( $POST[$category] ) OR !isset( $POST[$category.'_Columns'] ) ) {
                 unset( $extraFileMeta[$category] );
@@ -82,7 +82,7 @@
      */
     
     $testHeader = 'Username';                                                           // make this a header that you are sure will appear in every output file
-    $path = $_PATH->output_dir;
+    $path = $_PATH->get('output_dir');
     $users = array();
     $IDs = isset($POST['IDs']) ? array_flip($POST['IDs']) : array();
     $outputColumns = array();
@@ -110,10 +110,10 @@
         );
         $users[ $name ][ $exp ][ $condNum ][ $session ][ $id ] = $fileName;
     }
-    unset( $allOutputFiles );                                                           // might as well free up some memory
+    unset( $allOutputFiles ); // might as well free up some memory
     
     // find all files in the folder for extra data that have a name matching one of our extra files
-    $path = $_PATH->current_data_dir; 
+    $path = $_PATH->get('current_data_dir'); 
     $allExtraFiles = is_dir( $path ) ? scandir( $path ) : array();
     $extraFiles = array_splice($allExtraFiles, 2); // remove the '.' and '..'
     foreach( $extraFiles as $fileName ) {

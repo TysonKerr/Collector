@@ -1,26 +1,10 @@
 <?php
-    session_start();
-
-    // set the root for initial file locations
-    $_root = '..';
+    require dirname(__DIR__). '/Code/initiateCollector.php';
+    require dirname(__DIR__) . '/Code/admin/adminFunctions.php';
     
-    // load file locations
-    require $_root.'/Code/pathfinder.class.php';
-    $_PATH = new Pathfinder();
+    admin\require_admin_status();
     
-    // load configs
-    require $_PATH->get('Parse');
-    $_CONFIG = Parse::fromConfig($_PATH->get('Config'), true);
-    
-    // load custom functions
-    require $_PATH->get('Custom Functions');
-    require 'loginFunctions.php';
-    
-    // declaring admin for first login
-    if (!isset($_SESSION['admin'])) {
-        $_SESSION['admin'] = array();
-    }
-    $admin =& $_SESSION['admin'];
+    $admin =& $_SESSION['Admin Tools'];
     
     // scanning for available tools
     require 'toolsFunctions.php';
@@ -41,11 +25,8 @@
 <!DOCTYPE HTML>
 <head>
     <link rel="icon" href="../Code/icon.png" type="image/png">
-    <link href="../Code/css/global.css"  rel="stylesheet"   type="text/css"/>
-    <script src="../Code/javascript/jquery.js"   type="text/javascript"></script>
-    <script src="../Code/javascript/sha256.js"              type="text/javascript"></script>
-    <script src="../Code/javascript/loggingIn.js"           type="text/javascript"></script>
-    
+    <link href="../Code/css/global.css" rel="stylesheet" type="text/css"/>
+    <script src="../Code/javascript/jquery.js" type="text/javascript"></script>
     <title>Collector Tools -- <?= $admin['heading'] ?></title>
 </head>
 <html>
@@ -57,16 +38,6 @@
         }
     </style>
 	<body id="flexBody">
-<?php
-    // handling login state and display of login prompt
-    $state = loginState($_CONFIG->password);
-    if ($state != 'loggedIn') {
-        LoginPrompt($state);
-        $admin['status'] = 'attempting';
-        $admin['birth']  = time();
-        exit;
-    }
-?>
         <!-- displaying the welcome bar at the top -->
         <div id="nav">
             <h1><?= $admin['heading'] ?></h1>
@@ -87,7 +58,6 @@
         
 <?php   // require the selected tool
         if (isset($admin['tool'])) {
-
             $dataHolderKey = $admin['tool'] . 'Data';       // key within session where data can be stored
             if (!isset($admin[$dataHolderKey])) {           // if we haven't made a data holder yet
                 $admin[$dataHolderKey] = array();               // make it

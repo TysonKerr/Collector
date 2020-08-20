@@ -3,22 +3,12 @@
     A program for running experiments on the web
     Copyright 2012-2015 Mikey Garcia & Nate Kornell
  */
-    $root = '../';
-    require $root.'/Code/initiateCollector.php';
-    require 'GetData/scan.php';
+    require dirname(__DIR__) . '/Code/initiateCollector.php';
+    require dirname(__DIR__) . '/Code/admin/adminFunctions.php';
     
-    if( isset( $_POST['LogOut'] ) ) {
-        unset( $_SESSION['LoggedIn'] );
-    }
-    if( isset( $_POST['Password'] ) ) {
-        if( $_POST['Password'] === $_CONFIG->password ) {
-            $_SESSION['LoggedIn'] = true;
-        }
-    }
-    if( !isset( $_SESSION['LoggedIn'] ) ) {
-        include 'GetData/login.php';
-        exit;
-    }
+    admin\require_admin_status();
+    
+    require 'GetData/scan.php';
     
     $experimentList = array();
     $sessionList = array();
@@ -40,6 +30,7 @@
     }
     
     // quality checks of data
+    $temp = array();
     foreach( $users as $user => $exps ) {
         $expFlags = array();
         if( count($exps) > 1 ) {
@@ -48,6 +39,7 @@
         foreach( $exps as $conds ) {
             $conFlags = array();
             if( count($conds) > 1 ) {
+                $temp[] = array($user, $exps);
                 $conFlags['Multiple Conditions'] = true;
             }
             foreach( $conds as $sessS ) {
@@ -121,7 +113,7 @@
     <script src="http://code.jquery.com/jquery-1.8.0.min.js" type="text/javascript"> </script>
 </head>
 <body id="GetDataMenu">
-    <div id="Title">GetData<span style="position: relative"><form id="LogOutForm" method="post"><input type="submit" name="LogOut" value="Log out"/></form></span></div>
+    <div id="Title">GetData<span style="position: relative"><form id="LogOutForm" method="post"><input type="submit" name="col_adm_logout" value="Log out"/></form></span></div>
     
     <form method="post" target="_blank" action="GetData/generate.php" id="form" >
     
@@ -274,7 +266,7 @@
                                                             <div class="OutputTableCell">S-'.$IDs[$id]['Sess'].'</div>
                                                             <div class="OutputTableCell">'.$id.'</div>';
                                                     foreach( $flags as $name => $val ) {
-                                                        if( $val === '' ) {
+                                                        if( $val === '' || $val === null ) {
                                                             echo '<div class="OutputTableCell"></div>';
                                                         } else {
                                                             echo '<div class="OutputTableCell WarningFlag" data-tooltip="'.$images[$name].'"><img src="GetData/images/'.$images[$name].'.png"></div>';

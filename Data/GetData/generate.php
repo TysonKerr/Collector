@@ -5,10 +5,14 @@
  */
     $root = '../../';
     require $root.'/Code/initiateCollector.php';
-     
-    if( !isset( $_SESSION['LoggedIn'] ) ) {
-        header('Location: '.dirname('http://'.dirname( $_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'] ) ).'/' );
-        exit;
+    require dirname(dirname(__DIR__)) . '/Code/admin/adminFunctions.php';
+    
+    admin\require_admin_status();
+    
+    $_post = filter_input_array(INPUT_POST);
+    
+    if ($_post === null or count($_post) < 1) {
+        exit('Please return to the menu and resubmit your request.');
     }
     
     // filter user input before using

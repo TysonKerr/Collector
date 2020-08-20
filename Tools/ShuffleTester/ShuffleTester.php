@@ -1,15 +1,10 @@
 <?php
-    // access control
-    require_once 'loginFunctions.php';
-    adminOnly();                                        // only allow tool use when logged in
-    
     // needed for this tool
     $root = '../';                                      // gets us to the root
     require_once $root . 'Code/shuffleFunctions.php';  // load shuffle functions
     
     // making a place to store all variables (storing inside admin is best because it will be wiped on logout)
-    $_SESSION['admin']['shuffleTester'] = array();
-    $store =& $_SESSION['admin']['shuffleTester'];
+    $store =& $_DATA;
     
     // save selected file if in URL
     if (isset($_GET['shuffleFile'])) {
