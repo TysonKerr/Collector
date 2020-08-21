@@ -1,0 +1,7 @@
+Trial Type,Stim Rows,Max Time,Settings,Text,Shuffle
+vdr-free-recall,2::9,user,"""inputs"": 1",test 1,off
+vdr-free-recall,2::9,user,,test 2,off
+vdr-free-recall,2::9,user,"""inputs"": ""many""",test 3,off
+vdr-free-recall,2::9,user,,test 4,off
+vdr-free-recall,2::9,user,,test 5,off
+vdr-free-recall,2::9,user,,test 6,off
