@@ -27,7 +27,9 @@ function get_processed_data() {
         require get_trial_type_dir($trial_type) . '/scoring.php';
     }
     
-    if (isset($data['Response'], $answer) and $answer !== '') {
+    if (isset($data['Response'], $answer) and $answer !== ''
+        and !isset($data['Accuracy'], $data['lenientAcc'], $data['strictAcc'])
+    ) {
         $data += get_scoring($data['Response'], $answer);
     }
     
@@ -253,14 +255,19 @@ function get_trial_data_rows($trial_data) {
         }
     }
     
-    for ($i = 0; $i < $longest_resp; ++$i) {
-        $row = $row_base;
+    $rows = array_fill(0, $longest_resp, $row_base);
+    
+    foreach ($expanded_columns as $col => $vals) {
+        $i = 0;
         
-        foreach ($expanded_columns as $col => $vals) {
-            $row[$col] = isset($vals[$i]) ? $vals[$i] : '';
+        foreach ($vals as $val) {
+            $rows[$i][$col] = $val;
+            ++$i;
         }
         
-        $rows[] = $row;
+        for (; $i < $longest_resp; ++$i) {
+            $rows[$i][$col] = '';
+        }
     }
     
     return $rows;
