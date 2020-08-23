@@ -1,9 +1,9 @@
-<div class="study alignToInput">
-    <span class="study-left"   ><?= $cue; ?></span>
-    <span class="study-divider"><?= ":";  ?></span>
-    <div class="study-right"   >
-        <input name="Response" type="text" class="copybox collectorInput">
-    </div>
+<?= link_trial_type_file('study', 'style.css') ?>
+
+<div class="study-pair">
+    <span><?= $cue; ?></span>
+    <span><?= ":";  ?></span>
+    <span><input name="Response" type="text" class="collectorInput"></span>
 </div>
   
 <div class="textcenter">

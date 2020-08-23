@@ -1,5 +1,6 @@
 Stimuli,Procedure,Name
 ,demo-simple.csv,simple
+demo-stim.csv,demo-word-pairs.csv,word pairs
 demo-stim.csv,demo-filter.csv,age filter
 demo-stim.csv,demo-post-trials.csv,post trials
 ,demo-multi-session.csv,multi-session

@@ -6,10 +6,7 @@
     <base href="<?= get_url_to_root() ?>">
     <link rel="icon" href="Links/icon.png" type="image/png">
     
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>          
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
-    
+    <?= get_link('Links/css/normalize.css') ?>
     <?= get_link('Links/css/Collector.css') ?>
     <?= get_link('Links/js/jquery.js') ?>
     <?= get_link('Links/js/Collector.js') ?>

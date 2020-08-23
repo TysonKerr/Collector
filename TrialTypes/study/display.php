@@ -1,7 +1,7 @@
-<div class="study">
-    <span class="study-left"   ><?= $cue;    ?></span>
-    <span class="study-divider"><?= ":";     ?></span>
-    <span class="study-right"  ><?= $answer; ?></span>
+<div class="study-pair">
+    <span><?= $cue;    ?></span>
+    <span><?= ":";   ?></span>
+    <span><?= $answer; ?></span>
 </div>
 
 <div class="textcenter">

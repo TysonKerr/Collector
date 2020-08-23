@@ -438,6 +438,7 @@ function get_user_checkbox_row($user, $exp_dir, $info) {
 }
 
 function get_id_html($ids) {
+    if ($ids === false) return 'no login';
     if (count($ids) === 1) return $ids[0];
     
     $html  = '<div class="id-list">';

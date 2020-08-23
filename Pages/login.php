@@ -8,12 +8,12 @@
     <h1 class="textcenter"><?= get_config('welcome') ?></h1>
     <div class="exp-description"><?= get_config('exp_description') ?></div>
     
-    <section id="indexLogin" class="flexVert">
+    <section id="indexLogin">
         <div class="login-error-message"><?= $error_message ?></div>
-        <div class="textcenter flexChild">
+        <div class="textcenter">
             Please enter your <?= get_config('ask_for_login') ?>
         </div>
-        <div class="flexChild">
+        <div>
             <input name="u" type="text" value="" autocomplete="off" class="collectorInput" placeholder="<?= get_config('ask_for_login') ?>">
             <input name="c" value="<?= get_input_conditions_index() ?>" type="hidden">
             

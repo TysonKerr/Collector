@@ -3,7 +3,12 @@
     min-width: 400px;
     text-align: left;
     margin: auto;
+    padding-left: 30px;
     /*Make the flexchild, form, fit the basic info content size*/
+}
+
+.basicInfo h3 {
+    margin: 1.25em 0 0.25em -20px;
 }
 
 .basicInfo legend {
@@ -11,10 +16,27 @@
 }
 
 #age-warning {
-    margin-left: 2.5em;
+    margin: 0.25em 0 0 0;
     font-size: 125%;
     color: #600;
     width: 400px;
 }
 
 .invis { visibility: hidden; }
+
+.basicInfo section {}
+
+.radioButtons > label {
+  margin: 0em 0.5em 0em 0em;
+  display: block;
+}
+.radioButtons > label:hover {
+  background-color: #a1ffd9;
+  border-radius: 3px;
+}
+.radioButtons input {
+  margin: 0em .5em .3em .5em;
+}
+.radioButtons input:focus {
+  outline: none;
+} 
