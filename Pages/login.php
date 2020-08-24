@@ -27,4 +27,6 @@
     </section>
 </form>
 
-<embed src="<?= get_consent_path() ?>" class="login-consent-form">
+<div id="login-consent-container">
+    <embed src="<?= get_consent_path() ?>" class="login-consent-form">
+</div>

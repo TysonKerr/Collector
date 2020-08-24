@@ -86,6 +86,7 @@ input {
   max-height: 100%;
   overflow: visible;
   text-align: center;
+  display: block;
 }
 
 /* spacing alignment */
@@ -172,6 +173,10 @@ input {
     text-align: left;
     max-width: 700px;
     line-height: 1.5em;
+}
+
+#login-consent-container {
+    min-height: 905px;
 }
 /* format diagnostics */
 .dump {
