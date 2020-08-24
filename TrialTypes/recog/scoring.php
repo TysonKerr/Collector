@@ -1,9 +1,6 @@
 <?php
 
-$resp = $data['Response'];
-$ans = $directive === 'not studied' ? 'FRIEND' : 'YOU';
-
-if ($resp === $ans) {
+if (strtolower($data['Response']) === strtolower($recog_answer)) {
     $data['Accuracy']   = 100;
     $data['lenientAcc'] = 1;
     $data['strictAcc']  = 1;

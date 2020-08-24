@@ -1,0 +1,27 @@
+Cue,Answer,Recog Answer,List,"AdvShuffle; Target Cue, Answer"
+a,apple,old,1,all words
+b,banana,old,1,all words
+c,cactus,old,1,all words
+d,date,old,1,all words
+e,elephant,new,1,all words
+f,ferret,new,1,all words
+g,giraffe,new,1,all words
+h,horse,new,1,all words
+i,igloo,old,2,all words
+j,jeep,old,2,all words
+k,kangaroo,old,2,all words
+l,lemon,old,2,all words
+m,marble,new,2,all words
+n,noodle,new,2,all words
+o,orange,new,2,all words
+p,peach,new,2,all words
+q,quail,old,3,all words
+r,raccoon,old,3,all words
+s,snake,old,3,all words
+t,tarantula,old,3,all words
+u,umpire,new,3,all words
+v,vole,new,3,all words
+w,whale,new,3,all words
+x,xylophone,new,3,all words
+y,yellow,,,all words
+z,zebra,,,all words

@@ -1,0 +1,10 @@
+.cue {
+    text-align: center;
+    font-size: 200%;
+}
+
+.response-area button {
+    margin: 40px;
+    width: 100px;
+    height: 35px;
+}

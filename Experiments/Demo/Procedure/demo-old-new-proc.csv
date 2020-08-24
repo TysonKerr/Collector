@@ -1,0 +1,21 @@
+Trial Type,Stim Rows,Max Time,Settings,Text,Shuffle
+instruct,0,user,,"You will see a short list of words. After that, you will be shown another list, and be asked to pick which words you recognize.",off
+study-list,2::5,user,"""study"": 1.5, ""isi"": 0.25",second instruct,off
+recog,2,user,,,list 1
+recog,3,user,,,list 1
+recog,4,user,,,list 1
+recog,5,user,,,list 1
+recog,6,user,,,list 1
+recog,7,user,,,list 1
+recog,8,user,,,list 1
+recog,9,user,,,list 1
+instruct,0,user,,"That completes list 1. Click ""Next"" to begin list 2.",off
+study-list,10::13,user,"""study"": 1.5, ""isi"": 0.25",second instruct,off
+recog,10,user,,,list 2
+recog,11,user,,,list 2
+recog,12,user,,,list 2
+recog,13,user,,,list 2
+recog,14,user,,,list 2
+recog,15,user,,,list 2
+recog,16,user,,,list 2
+recog,17,user,,,list 2
