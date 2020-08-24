@@ -1,3 +1,4 @@
+"use strict";
 /**
  *  JS for Collector
  *  ver. 1.0.0
@@ -41,6 +42,23 @@ const COLLECTOR = {
     add_input: function(name, val) {
         $(`<input type="hidden" name="${name}" value="${val}">`).appendTo("form");
     },
+    
+    get_submit_button: function() {
+        const btn = document.getElementById("FormSubmitButton");
+        
+        if (btn !== null) return btn;
+        
+        return this.create_form_submit_button();
+        
+    },
+    
+    create_form_submit_button: function() {
+        const btn = document.createElement("button");
+        btn.type = "submit";
+        btn.style.display = "none";
+        document.querySelector("form").appendChild(btn);
+        return btn;
+    },
 
     /**
      *  Timer function
@@ -68,7 +86,8 @@ const COLLECTOR = {
             cap         = 4,
             goal        = Date.now() + timeUp*1000,
             lastWait    = cap*2,
-            lastAim     = (cap*2)/waitPercent;
+            lastAim     = (cap*2)/waitPercent,
+            id;
 
         function instance() {
             var timeRemaining = goal - Date.now(),
@@ -102,11 +121,17 @@ const COLLECTOR = {
             timeRemaining = Math.max(cap, Math.floor(timeRemaining));
 
             // run the timer again, using a percentage of the time remaining
-            setTimeout(function() { instance(); }, timeRemaining);
+            id = setTimeout(function() { instance(); }, timeRemaining);
         }
 
         // start the timer
         instance();
+        
+        return {
+            cancel: function() {
+                window.clearTimeout(id);
+            }
+        };
     },
 
     getRT: function() {
@@ -280,27 +305,13 @@ const COLLECTOR = {
             });
             
             if (typeof on_trial_start === "function") on_trial_start();
+            
+            multi_trial.init();
         },
     },
-
-    finalQuestions: {
-        init: function() {
-            // slider for Likert questions
-            $("#slider").slider({
-                value:1,
-                min:  1,
-                max:  7,
-                step: 1,
-                slide: function(event, ui) {
-                    $("#amount").val(ui.value);
-                }
-            });
-            $("#amount").val( $("#slider").slider("value") );
-        }
-    }
 };
 
-UTIL = {
+const UTIL = {
     exec: function( controller, action ) {
         var ns = COLLECTOR,
             action = (action === undefined) ? "init" : action;
@@ -320,8 +331,6 @@ UTIL = {
         UTIL.exec(controller, action);
     }
 };
-
-
 
 jQuery.fn.focusWithoutScrolling = function() {
     if ($(this).length === 0) return this;
@@ -399,3 +408,135 @@ jQuery.fn.preventDoubleSubmission = function() {
 };
 
 $(window).on("load", (UTIL.init));
+
+const multi_trial = {
+    trial: 0,
+    phase: 0,
+    phases: [],
+    callbacks: {},
+    
+    trial_start: 0,
+    phase_start: 0,
+    
+    ready_to_submit: false,
+    phase_timer: null,
+    
+    init: function() {
+        this.trial_count = document.querySelectorAll(".trial-container").length;
+        
+        if (this.trial_count > 0 && this.phases.length > 0) {
+            this.set_phase_submit_handler();
+            this.start_trial();
+        }
+    },
+    
+    set_phase_submit_handler: function() {
+        document.addEventListener("submit", e => {
+            if (!this.ready_to_submit) {
+                e.preventDefault();
+                e.stopPropagation();
+                this.end_phase();
+            }
+        }, true);
+    },
+    
+    start_trial: function() {
+        const container = this.get_trial_container();
+        container.classList.add("current-trial");
+        this.phase = 0;
+        this.trial_start = performance.now();
+        this.start_phase();
+    },
+    
+    get_trial_container: function() {
+        let index = this.trial + 1;
+        return document.querySelector(`.trial-container:nth-child(${index})`);
+    },
+    
+    start_phase: function() {
+        const container = this.get_phase_container();
+        const phase_name = this.phases[this.phase];
+        this.phase_start = performance.now();
+        this.prepare_timing(phase_name, container);
+        container.classList.add("current-phase");
+        this.focus_on_first_focusable(container);
+        
+        if (phase_name in this.callbacks) this.callbacks[phase_name]();
+    },
+    
+    focus_on_first_focusable: function(container) {
+        const element = this.get_first_focusable(container);
+        
+        if (element) element.focus();
+    },
+    
+    get_first_focusable: function(container) {
+        const focusable = Array.from(container.querySelectorAll("input, textarea, button"))
+            .filter(this.element_is_focusable);
+        
+        return focusable.length > 0 ? focusable[0] : null;
+    },
+    
+    element_is_focusable: function(element) {
+        if (element.disabled) return false;
+        
+        const style = window.getComputedStyle(element);
+        
+        if (style.getPropertyValue("display") === "none") return false;
+        if (style.getPropertyValue("visibility") === "hidden") return false;
+        
+        return true;
+    },
+    
+    get_phase_container: function() {
+        const name = this.phases[this.phase];
+        const selector = `.${name}-phase`;
+        return document.querySelector(`.current-trial ${selector}`);
+    },
+    
+    prepare_timing: function(phase_name, phase_container) {
+        const settings = this.get_settings();
+        
+        if (phase_name in settings) {
+            const phase_time = parseFloat(settings[phase_name]);
+            
+            if (!Number.isNaN(phase_time)) {
+                this.phase_timer = COLLECTOR.timer(phase_time, e => this.end_phase());
+                $(phase_container).find(":submit").addClass("invisible");
+            }
+        }
+    },
+    
+    get_settings: function() {
+        return COLLECTOR.trial_values.settings;
+    },
+    
+    end_phase: function() {
+        document.querySelector(".current-phase").classList.remove("current-phase");
+        ++this.phase;
+        
+        if (this.phase_timer !== null) this.phase_timer.cancel();
+        
+        if (this.phase >= this.phases.length) {
+            this.end_trial();
+        } else {
+            this.start_phase();
+        }
+    },
+    
+    end_trial: function() {
+        document.querySelector(".current-trial").classList.remove("current-trial");
+        ++this.trial;
+        
+        if (this.trial >= document.querySelectorAll(".trial-container").length) {
+            this.submit_trials();
+        } else {
+            this.start_trial();
+        }
+    },
+    
+    submit_trials: function() {
+        this.ready_to_submit = true;
+        COLLECTOR.get_submit_button().click();
+    }
+};

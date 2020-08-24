@@ -150,9 +150,9 @@ function get_dam_lev_distances_with_limit($responses, $answers, $leniencies) {
     return $dists;
 }
 
-function get_word_matches($responses, $answers, $leniencies) {
+function get_word_matches($responses, $answers, $leniencies, $values) {
     $dists = get_dam_lev_distances_with_limit($responses, $answers, $leniencies);
-    $matches = get_matches_default($answers);
+    $matches = get_matches_default($answers, $values);
     // keep going until all of our Answer rows are empty, meaning they have had all possible matches removed
     while (count($dists['ans'], COUNT_RECURSIVE) !== count($dists['res'])) {
         foreach ($dists['ans'] as $ans_i => $resp_dists_to_ans) {
@@ -184,14 +184,15 @@ function get_word_matches($responses, $answers, $leniencies) {
     return $matches;
 }
 
-function get_matches_default($answers) {
+function get_matches_default($answers, $values) {
     $matches = [];
     
     foreach ($answers as $i => $ans) {
         $matches[$ans] = [
-            'word' => '_',
-            'diff' => '_',
-            'output_order' => '_',
+            'word' => false,
+            'diff' => false,
+            'output_order' => false,
+            'value' => $values[$i]
         ];
     }
     

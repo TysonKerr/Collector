@@ -1,7 +1,14 @@
 Trial Type,Stim Rows,Max Time,Settings,Text,Shuffle
-vdr-free-recall,2::9,user,"""inputs"": 1",test 1,off
-vdr-free-recall,2::9,user,,test 2,off
-vdr-free-recall,2::9,user,"""inputs"": ""many""",test 3,off
-vdr-free-recall,2::9,user,,test 4,off
-vdr-free-recall,2::9,user,,test 5,off
-vdr-free-recall,2::9,user,,test 6,off
+vdr-study-list,2::9,user,"""study"": 1.5, ""isi"": 0.25",,off
+vdr-free-recall,2::9,user,"""inputs"": 1",Now recall as many words as you can!,off
+vdr-feedback,2::9,user,,words: $possibleAcc <br> max score possible: $possibleVal <br> words recalled: $lenientAcc <br> points received: $lenientVal <br> words recalled with no typos: $strictAcc <br> points received for words with no typos: $strictVal,off
+vdr-study-list,10::17,user,"""study"": 1.5, ""isi"": 0.25",,off
+vdr-free-recall,10::17,user,"""inputs"": 3",Now recall as many words as you can!,off
+vdr-feedback,10::17,user,,You received $lenientVal points out of $possibleVal possible.,off
+vdr-study-list,18::25,user,"""study"": 1.5, ""isi"": 0.25",,off
+vdr-free-recall,18::25,user,"""inputs"": ""many""",Now recall as many words as you can!,off
+vdr-feedback,18::25,user,,score: <strong>$lenientVal</strong>,off
+vdr-study-list,2::9,user,"""study"": 1.5, ""isi"": 0.25",,off
+vdr-free-recall,2::9,user,,Now recall as many words as you can!,off
+vdr-feedback,2::9,user,,You recalled <strong>$lenientAcc</strong> words!,off
+vdr-feedback,2::25,user,,"For the whole experiment, you recalled $lenientAcc words and received $lenientVal points. (since you did list 1 twice, the second test will overwrite the scores of the first test).",off

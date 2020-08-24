@@ -9,7 +9,11 @@ $values = isset($value)
         ? get_arr_with_numeric_vals(explode('|', $value))
         : array_fill(0, count($stimuli), 1);
 $responses = get_word_responses($data['Response']);
-$matches = get_word_matches($responses, $answers, $leniencies);
+$matches = get_word_matches($responses, $answers, $leniencies, $values);
+
+if (!isset($_SESSION['Words recalled'])) $_SESSION['Words recalled'] = [];
+
+$_SESSION['Words recalled'] = $matches + $_SESSION['Words recalled'];
 
 $data['Response_raw'] = get_raw_response($data['Response']);
 $data['Response']    = implode('|', $responses);
@@ -26,13 +30,13 @@ $data['Word_strictAcc']  = array_fill(0, count($stimuli), 0);
 $data['Word_strictVal']  = array_fill(0, count($stimuli), 0);
 
 foreach ($answers as $i => $ans) {
-    if ($matches[$ans]['diff'] !== '_') {
+    if ($matches[$ans]['word'] !== false) {
         $data['Word_lenientAcc'][$i] = 1;
-        $data['Word_lenientVal'][$i] = $values[$i];
+        $data['Word_lenientVal'][$i] = $matches[$ans]['value'];
         
         if ($matches[$ans]['diff'] === 0) {
             $data['Word_strictAcc'][$i] = 1;
-            $data['Word_strictVal'][$i] = $values[$i];
+            $data['Word_strictVal'][$i] = $matches[$ans]['value'];
         }
     }
 }
@@ -48,8 +52,3 @@ $si_len = get_selectivity_index($values, $data['lenientVal'], $data['lenientAcc'
 
 $data['Selectivity_Index_Strict']  = $si_str;
 $data['Selectivity_Index_Lenient'] = $si_len;
-
-/*
-dump($data);
-exit;
-//*/

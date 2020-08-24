@@ -1,27 +1,27 @@
-Cue,Answer,Value
-a,apple,1
-b,banana,2
-c,cactus,3
-d,date,4
-e,elephant,5
-f,ferret,6
-g,giraffe,7
-h,horse,8
-i,igloo,1
-j,jeep,2
-k,kangaroo,3
-l,lemon,4
-m,marble,5
-n,noodle,6
-o,orange,7
-p,peach,8
-q,quail,1
-r,raccoon,2
-s,snake,3
-t,tarantula,4
-u,umpire,5
-v,vole,6
-w,whale,7
-x,xylophone,8
-y,yellow,1
-z,zebra,2
+Cue,Answer,Value,"Advshuffle; Target Cue,Answer",Advshuffle; Target Value
+a,apple,1,all words,list 1
+b,banana,2,all words,list 1
+c,cactus,3,all words,list 1
+d,date,4,all words,list 1
+e,elephant,5,all words,list 1
+f,ferret,6,all words,list 1
+g,giraffe,7,all words,list 1
+h,horse,8,all words,list 1
+i,igloo,1,all words,list 2
+j,jeep,2,all words,list 2
+k,kangaroo,3,all words,list 2
+l,lemon,4,all words,list 2
+m,marble,5,all words,list 2
+n,noodle,6,all words,list 2
+o,orange,7,all words,list 2
+p,peach,8,all words,list 2
+q,quail,1,all words,list 3
+r,raccoon,2,all words,list 3
+s,snake,3,all words,list 3
+t,tarantula,4,all words,list 3
+u,umpire,5,all words,list 3
+v,vole,6,all words,list 3
+w,whale,7,all words,list 3
+x,xylophone,8,all words,list 3
+y,yellow,1,all words,off
+z,zebra,2,all words,off

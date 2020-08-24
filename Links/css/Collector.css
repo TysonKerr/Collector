@@ -28,7 +28,7 @@ h1,h2,h3,h4,h5,h6,a {
   background-color:#0f9;
 }
 .collectorAdvance {
-  margin-top: 2em;
+  margin-top: 3em;
 }
 
 /* styling for when a button is disabled (`Min Time` not reached) */
@@ -190,4 +190,13 @@ input {
     padding: 8px;
     white-space: pre-wrap;
     max-width: 100%;
+}
+
+/* multi trial */
+.trial-container:not(.current-trial) {
+    display: none;
+}
+
+.trial-container > *:not(.current-phase) {
+    display: none;
 }
