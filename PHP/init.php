@@ -3,6 +3,7 @@
 require __DIR__ . '/definitions/general.php';
 require __DIR__ . '/definitions/init.php';
 require __DIR__ . '/definitions/parse.class.php';
+require __DIR__ . '/vendor/tcon.php';
 
 error_reporting(E_ALL);
 ini_set('auto_detect_line_endings', true);

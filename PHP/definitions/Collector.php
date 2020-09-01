@@ -388,11 +388,81 @@ function check_if_logged_in() {
     if (!isset($_SESSION['Username'])) redirect('login');
 }
 
-function parse_settings($settings_val, $defaults = []) {
-    $settings = json_decode('{' . $settings_val . '}', true);
+function parse_trial_settings($settings_val, $trial_type) {
+    try {
+        $settings = tcon\tcon_parse($settings_val);
+    } catch (Exception $e) {
+        $settings_html = htmlspecialchars($settings_val);
+        $msg = $e->getMessage();
+        throw new Exception("Failed to parse trial settings, '$settings_html', with error message:\n $msg");
+    }
     
-    if (!is_array($settings)) $settings = array();
-    if (!is_array($defaults)) $defaults = array();
+    $settings = get_settings_with_defaults($settings, $trial_type);
     
-    return array_merge($defaults, $settings);
+    // check for settings with null value, count those as missing requirements
+    foreach ($settings as $key => $val) {
+        if ($val === null) throw missing_setting_exception($trial_type, $key);
+    }
+    
+    return $settings;
+}
+
+function missing_setting_exception($trial_type, $key) {
+    $msg = "The trial type '$trial_type' requires a setting '$key' to be "
+         . "provided in the Settings column (e.g., '$key': 'some value...'";
+    throw new Exception($msg);
+}
+
+function get_settings_with_defaults($provided_vals, $trial_type) {
+    // im going to treat this like python functions, where numeric settings
+    // will be assigned to the setting key with that position
+    $defaults = get_default_settings($trial_type);
+    $settings = [];
+    $pos = 0;
+    
+    foreach ($defaults as $key => $default_val) {
+        $settings[$key] = $default_val;
+        
+        if (isset($provided_vals[$key])) {
+            $settings[$key] = $provided_vals[$key];
+            unset($provided_vals[$key]);
+        } else if (isset($provided_vals[$pos])) {
+            $settings[$key] = $provided_vals[$pos];
+            unset($provided_vals[$pos]);
+            ++$pos;
+        }
+    }
+    
+    // remaining settings will simply be pushed onto array
+    foreach ($provided_vals as $key => $val) {
+        if (gettype($key) === 'integer') {
+            $settings[] = $val;
+        } else {
+            $settings[$key] = $val;
+        }
+    }
+    
+    return $settings;
+}
+
+function get_default_settings($trial_type) {
+    $filename = get_trial_file($trial_type, 'settings.tcon');
+    
+    if (!is_file($filename)) return[];
+    
+    try {
+        $defaults = tcon\tcon_parse(file_get_contents($filename));
+    } catch (Exception $e) {
+        $msg = $e->getMessage();
+        throw new Exception("Failed to parse tcon file 'settings.tcon' in the '$trial_type' trial type folder, error message:\n $msg");
+    }
+    
+    foreach ($defaults as $key => $val) {
+        if (gettype($key) === 'integer') {
+            unset($defaults[$key]);
+            $defaults[$val] = null;
+        }
+    }
+    
+    return $defaults;
 }

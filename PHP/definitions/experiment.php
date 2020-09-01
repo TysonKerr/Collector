@@ -55,6 +55,8 @@ function get_trial_values($procedure, $stimuli) {
         $values[get_alias_name($col)] = $val;
     }
     
+    $values['settings'] = parse_trial_settings($values['settings'], $procedure['Trial Type']);
+    
     return $values;
 }
 

@@ -1,7 +1,5 @@
 <?php
 
-$default_settings = ['inputs' => 1];
-
 function get_number_of_inputs($settings, $stim_rows) {
     if (is_numeric($settings['inputs'])) {
         return max(1, (int) $settings['inputs']);

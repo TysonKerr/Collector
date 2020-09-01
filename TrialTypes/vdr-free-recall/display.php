@@ -1,8 +1,7 @@
 <?php
 
 echo "<div class='instructions'>$text</div>";
-$parsed_settings = parse_settings($settings, $default_settings);
-$number_of_inputs = get_number_of_inputs($parsed_settings, $stimuli);
+$number_of_inputs = get_number_of_inputs($settings, $stimuli);
 echo '<div><div class="input-container">';
 
 if ($number_of_inputs === 1) {

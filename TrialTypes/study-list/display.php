@@ -1,12 +1,3 @@
-<?php
-    $defaults = [
-        'study' => 2,
-        'isi' => 0.5
-    ];
-    
-    $settings = parse_settings($settings, $defaults);
-?>
-
 <div>
   <?php foreach ($stimuli as $stim): ?>
     <div class="trial-container">

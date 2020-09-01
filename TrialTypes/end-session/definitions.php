@@ -1,18 +1,18 @@
 <?php
 
-function get_max_time_for_waiting($settings) {
-    if (is_numeric($settings)) {
-        $max_time = get_max_time_for_waiting_specific_amount($settings);
+function get_max_time_for_waiting($max_time) {
+    if (is_numeric($max_time)) {
+        $time_left = get_max_time_for_waiting_specific_amount($max_time);
     } else {
-        $max_time = get_max_time_for_waiting_for_relogin();
+        $time_left = get_max_time_for_waiting_for_relogin();
     }
     
-    return $max_time;
+    return $time_left;
 }
 
-function get_max_time_for_waiting_specific_amount($settings) {
+function get_max_time_for_waiting_specific_amount($max_time) {
     if (!isset($_SESSION['resume time'])) {
-        $_SESSION['resume time'] = get_resume_time($settings);
+        $_SESSION['resume time'] = get_resume_time($max_time);
         $_SESSION['Session']++;
     }
 
@@ -21,8 +21,8 @@ function get_max_time_for_waiting_specific_amount($settings) {
     return $_SESSION['resume time'] - time();
 }
 
-function get_resume_time($settings) {
-    $time_to_wait = (int) $settings;
+function get_resume_time($max_time) {
+    $time_to_wait = (int) $max_time;
 
     if ($time_to_wait < 1) $time_to_wait = 1;
     

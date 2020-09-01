@@ -1,13 +1,4 @@
-<?php
-    echo link_trial_type_file('study', 'style.css');
-    
-    $defaults = [
-        'study' => 2,
-        'isi' => 0.5
-    ];
-    
-    $settings = parse_settings($settings, $defaults);
-?>
+<?= link_trial_type_file('study', 'style.css') ?>
 
 <div>
   <?php foreach ($stimuli as $stim): ?>
