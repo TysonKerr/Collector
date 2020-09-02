@@ -9,10 +9,11 @@ function check_if_experiment_is_done() {
 }
 
 function get_current_procedure() {
-    $position   = $_SESSION['Position'];
-    $post_trial = $_SESSION['Post Trial'];
-    $trial_set  = $_SESSION['Procedure'][$position];
-    
+    return get_trial_procedure($_SESSION['Position'], $_SESSION['Post Trial']);
+}
+
+function get_trial_procedure($position, $post_trial) {
+    $trial_set = $_SESSION['Procedure'][$position];
     return get_trial_proc_values($trial_set, $post_trial);
 }
 
@@ -86,6 +87,138 @@ function send_trial_values_to_javascript($trial_values) {
     ?><script>
         COLLECTOR.trial_values = <?= json_encode($trial_values) ?>;
     </script><?php
+}
+
+## Retrieving previous trial data
+
+function get_previous_trials($settings) {
+    $response_indices = get_selected_trial_indices($settings);
+    $trial_data = [];
+    
+    foreach ($response_indices as $trial_index) {
+        $trial_data[] = get_previous_trial_data($trial_index[0], $trial_index[1]);
+    }
+    
+    return $trial_data;
+}
+
+function get_previous_trial_data($position, $post_trial) {
+    $trial = [
+        'Procedure' => get_trial_procedure($position, $post_trial),
+        'Stimuli'   => null,
+        'Responses' => $_SESSION['Responses'][$position][$post_trial]
+    ];
+    
+    $trial['Stimuli'] = get_stimuli_rows($trial['Procedure']['Stim Rows']);
+    
+    return $trial;
+}
+
+function get_selected_trial_indices($settings) {
+    $trial_indices = get_previous_response_indices();
+    $indices = get_trial_absolute_indices($settings, $trial_indices);
+    $selected = [];
+    
+    foreach ($indices as $trial_index) {
+        $selected[] = $trial_indices[$trial_index];
+    }
+    
+    return $selected;
+}
+
+function get_trial_absolute_indices($settings, $trial_indices) {
+    $indices = [];
+    $prev_trials = $settings['previous_trials'] ?? false;
+    $prev_range  = $settings['previous_range']  ?? false;
+    $abs_range   = $settings['absolute_range']  ?? false;
+    $labels      = $settings['labels']          ?? false;
+    $trial_count = count($trial_indices);
+    
+    $indices = array_merge(
+        get_prev_trial_indices($prev_trials, $trial_count),
+        get_prev_range_indices($prev_range,  $trial_count),
+        get_abs_range_indices( $abs_range,   $trial_count),
+        get_labled_indices(    $labels,      $trial_indices)
+    );
+    
+    $indices = array_keys(array_flip($indices));
+    sort($indices);
+    return $indices;
+}
+
+function get_previous_response_indices() {
+    $indices = [];
+    
+    foreach ($_SESSION['Responses'] as $pos => $set) {
+        foreach ($set as $post => $trial_responses) {
+            $indices[] = [$pos, $post];
+        }
+    }
+    
+    return $indices;
+}
+
+function get_prev_trial_indices($prev_trials, $trial_count) {
+    $indices = [];
+    
+    if (is_numeric($prev_trials)) {
+        $prev_trials = (int) $prev_trials;
+        
+        for ($i = 1; $i <= $prev_trials; ++$i) {
+            $indices[] = $trial_count - $i;
+        }
+    }
+    
+    return $indices;
+}
+
+function get_prev_range_indices($prev_range, $trial_count) {
+    $indices = [];
+    
+    if (is_string($prev_range) and strlen($prev_range) > 0) {
+        $range = get_range($prev_range);
+        
+        foreach ($range as $i) {
+            if (is_numeric($i) and $i > 0) $indices[] = $trial_count - $i;
+        }
+    }
+    
+    return $indices;
+}
+
+function get_abs_range_indices($abs_range, $trial_count) {
+    $indices = [];
+    
+    if (is_string($abs_range) and strlen($abs_range) > 0) {
+        $range = get_range($abs_range);
+        
+        foreach ($range as $i) {
+            if (is_numeric($i) and $i >= 0 and $i < $trial_count) $indices[] = $i;
+        }
+    }
+    
+    return $indices;
+}
+
+function get_labled_indices($labels, $trial_indices) {
+    $indices = [];
+    
+    if (is_string($labels)) $labels = [$labels];
+    
+    if (is_array($labels)) {
+        $labels = array_flip($labels);
+        
+        foreach ($trial_indices as $i => $index_pair) {
+            $trial = $_SESSION['Procedure'][$index_pair[0]][$index_pair[1]];
+            $label = $trial['Label'] ?? false;
+            
+            if (isset($labels[$label])) $indices[] = $i;
+        }
+        
+        $indices[] = $i;
+    }
+    
+    return $indices;
 }
 
 ## Error handling

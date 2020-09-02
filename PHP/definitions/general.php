@@ -278,3 +278,19 @@ function get_longest_subarray_count($array) {
     
     return $count;
 }
+
+function get_flat_array($arr) {
+    $vals = [];
+    
+    foreach ($arr as $val) {
+        if (is_array($val)) {
+            foreach (get_flat_array($val) as $sub_val) {
+                $vals[] = $sub_val;
+            }
+        } else {
+            $vals[] = $val;
+        }
+    }
+    
+    return $vals;
+}

@@ -1,0 +1,15 @@
+Trial Type,Stim Rows,Max Time,Settings,Text,Shuffle,Label
+copy,2,user,,,off,study1
+copy,3,user,,,off,study1
+copy,4,user,,,off,study1
+copy,5,user,,,off,study1
+feedback,0,user,previous_trials: 4,feedback 1: <br> points: $lenientAcc,off,
+feedback,0,user,"previous_range: ""2::5""",feedback 2: <br> points: $lenientAcc,off,
+feedback,0,user,"absolute_range: ""0::3""",feedback 3: <br> points: $lenientAcc,off,
+feedback,0,user,labels: study1,feedback 4: <br> points: $lenientAcc,off,
+copy,6,user,,,off,study2
+copy,7,user,,,off,study2
+copy,8,user,,,off,study2
+copy,9,user,,,off,study2
+feedback,0,user,previous_trials: 4,feedback 5: <br> points: $lenientAcc,off,
+feedback,0,user,labels: [study1 study2],feedback 6: <br> points: $lenientAcc,off,

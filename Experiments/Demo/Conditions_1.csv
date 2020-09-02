@@ -7,3 +7,4 @@ demo-stim.csv,demo-post-trials.csv,post trials
 demo-words.csv,demo-digit-detection.csv,digit-detection
 demo-vdr-stim.csv,demo-vdr.csv,vdr
 demo-old-new-stim.csv,demo-old-new-proc.csv,old-new
+demo-words.csv,demo-feedback.csv,feedback
