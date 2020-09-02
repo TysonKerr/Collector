@@ -13,7 +13,3 @@
     </div>
   <?php endforeach; ?>
 </div>
-
-<script>
-    multi_trial.phases = ["study", "isi"];
-</script>

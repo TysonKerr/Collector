@@ -410,9 +410,9 @@ jQuery.fn.preventDoubleSubmission = function() {
 $(window).on("load", (UTIL.init));
 
 const multi_trial = {
+    disabled: false,
     trial: 0,
     phase: 0,
-    phases: [],
     callbacks: {},
     
     trial_start: 0,
@@ -422,9 +422,11 @@ const multi_trial = {
     phase_timer: null,
     
     init: function() {
+        if (this.disabled) return;
+        
         this.trial_count = document.querySelectorAll(".trial-container").length;
         
-        if (this.trial_count > 0 && this.phases.length > 0) {
+        if (this.trial_count > 0) {
             this.set_phase_submit_handler();
             this.start_trial();
         }
@@ -454,14 +456,39 @@ const multi_trial = {
     },
     
     start_phase: function() {
-        const container = this.get_phase_container();
-        const phase_name = this.phases[this.phase];
+        const phase_name = this.get_phase_name(this.phase);
+        
+        if (phase_name === null) return this.end_trial();
+        
+        const container = this.get_phase_container(phase_name);
         this.phase_start = performance.now();
         this.prepare_timing(phase_name, container);
         container.classList.add("current-phase");
         this.focus_on_first_focusable(container);
         
         if (phase_name in this.callbacks) this.callbacks[phase_name]();
+    },
+    
+    get_phase_name: function(index) {
+        return this.get_phase_names()[index] || null;
+    },
+    
+    get_phase_names: function() {
+        const container = document.querySelector(".current-trial");
+        return Array.from(container.children).map(this.get_element_phase_name)
+            .filter(name => name);
+    },
+    
+    get_element_phase_name: function(element) {
+        for (let i = 0; i < element.classList.length; ++i) {
+            let classname = element.classList[i];
+            
+            if (classname.substring(classname.length - 6) === "-phase") {
+                return classname.substring(0, classname.length - 6);
+            }
+        }
+        
+        return null;
     },
     
     focus_on_first_focusable: function(container) {
@@ -488,10 +515,8 @@ const multi_trial = {
         return true;
     },
     
-    get_phase_container: function() {
-        const name = this.phases[this.phase];
-        const selector = `.${name}-phase`;
-        return document.querySelector(`.current-trial ${selector}`);
+    get_phase_container: function(name) {
+        return document.querySelector(`.current-trial .${name}-phase`);
     },
     
     prepare_timing: function(phase_name, phase_container) {
@@ -515,13 +540,12 @@ const multi_trial = {
         document.querySelector(".current-phase").classList.remove("current-phase");
         ++this.phase;
         
-        if (this.phase_timer !== null) this.phase_timer.cancel();
-        
-        if (this.phase >= this.phases.length) {
-            this.end_trial();
-        } else {
-            this.start_phase();
+        if (this.phase_timer !== null) {
+            this.phase_timer.cancel();
+            this.phase_timer = null;
         }
+        
+        this.start_phase();
     },
     
     end_trial: function() {
