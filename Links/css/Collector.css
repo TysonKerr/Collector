@@ -4,6 +4,10 @@ h1,h2,h3,h4,h5,h6,a {
   font-weight: 400;
 }
 
+pre {
+    text-align: left;
+}
+
 /* buttons */
 .collectorButton {
   font-family: "Open Sans", Helvetica, Arial, sans-serif;
@@ -87,6 +91,11 @@ input {
   overflow: visible;
   text-align: center;
   display: block;
+}
+
+.recording-errors {
+    display: block;
+    text-align: center;
 }
 
 /* spacing alignment */

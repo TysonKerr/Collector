@@ -37,6 +37,15 @@ function get_processed_data() {
     $data['Trial_Record_TimeDif'] = get_time_diff_and_update_timestamp();
     
     check_for_errors_in_processed_data($data);
+    
+    if (get_config('stop_for_errors') and strlen(ob_get_contents()) > 0) {
+        $action = './' . get_page_path('experiment');
+        echo "<form method='get' action='$action' class='recording-errors'>"
+           .     '<button>Restart Trial</button>'
+           . '</form>';
+        exit;
+    }
+    
     return $data;
 }
 
@@ -76,7 +85,7 @@ function get_scoring($resp, $ans, $criterion = null) {
         if (count($answers) < count($resp)) return [];
         
         foreach ($resp as $i => $single_resp) {
-            $scores[] = get_scoring_of_scalar($single_resp, $answers, $criterion);
+            $scores[] = get_scoring_of_scalar($single_resp, $answers[$i], $criterion);
         }
         
         return invert_2d_array($scores);

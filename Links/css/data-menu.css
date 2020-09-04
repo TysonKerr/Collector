@@ -16,6 +16,19 @@ html, body, #Collector-content {
     background-color: #fff;
 }
 
+#menu-header h1 {
+    margin: 0;
+    font-size: 2.5em;
+    padding: 0.3em;
+}
+
+#data-menu {
+    display: block;
+    padding: 0;
+    max-width: initial;
+    text-align: center;
+}
+
 #controls {
     background-color: #fff;
     margin-bottom: 20px;
@@ -47,6 +60,7 @@ html, body, #Collector-content {
 .col-group {
     display: inline-block;
     vertical-align: top;
+    padding: 4px;
 }
 
 .col-list {

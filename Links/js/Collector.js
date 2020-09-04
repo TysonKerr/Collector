@@ -176,6 +176,7 @@ const COLLECTOR = {
 
     experiment: {
         init: function() {
+            if (document.querySelector(".recording-errors") !== null) return;
             // if we are recording data, we are about to redirect the page
             // so we dont need to actually run any client-side code
             if (typeof COLLECTOR.trial_values === "undefined") {
