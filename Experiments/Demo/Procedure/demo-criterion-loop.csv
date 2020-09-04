@@ -1,0 +1,9 @@
+Trial Type,Stim Rows,Max Time,Settings,Text,Shuffle
+instruct,0,user,,"<p>In the next few trials, you will shown some word pairs, and then you will be tested on them.</p> <p>If you remember less than 75% of the pairs, you will repeat the study and test phase.</p>",off
+copy,2,user,,,off
+copy,3,user,,,off
+copy,4,user,,,off
+copy,5,user,,,off
+test-list,2::5,user,,,off
+criterion-loop,0,user,rows: 5 criterion: 0.75 max_iterations: 2,,off
+instruct,0,user,,You succeeded!,off

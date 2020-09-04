@@ -1,0 +1,5 @@
+rows
+criterion: 0.75
+scoring_column: lenientAcc
+max_iterations: false
+trial_type_on_fail: criterion-fail

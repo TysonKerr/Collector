@@ -466,3 +466,21 @@ function get_default_settings($trial_type) {
     
     return $defaults;
 }
+
+function get_array_average($values) {
+    $numbers = get_numeric_values(get_flat_array($values));
+    
+    return count($numbers) === 0
+         ? NAN
+         : array_sum($numbers) / count($numbers);
+}
+
+function get_numeric_values($arr) {
+    $numbers = [];
+    
+    foreach ($arr as $val) {
+        if (is_numeric($val)) $numbers[] = $val;
+    }
+    
+    return $numbers;
+}

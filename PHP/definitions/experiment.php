@@ -91,25 +91,60 @@ function send_trial_values_to_javascript($trial_values) {
 
 ## Retrieving previous trial data
 
-function get_previous_trials($settings) {
+function get_average_response_from_trials($settings, $columns) {
+    $trials = get_previous_trial_responses($settings, false);
+    $values = get_response_values_from_trials($trials, $columns);
+    $scores = [];
+    
+    foreach ($values as $col => $vals) {
+        $scores[$col] = get_array_average($vals);
+    }
+    
+    return $scores;
+}
+
+function get_response_values_from_trials($trials, $columns) {
+    $values = [];
+    
+    foreach ($columns as $col) {
+        $values[$col] = [];
+    }
+    
+    foreach ($trials as $trial) {
+        foreach ($columns as $col) {
+            if (isset($trial['Responses'][$col])) {
+                $values[$col][] = $trial['Responses'][$col];
+            }
+        }
+    }
+    
+    return $values;
+}
+
+function get_previous_trial_responses($settings, $with_proc_and_stim = true) {
     $response_indices = get_selected_trial_indices($settings);
     $trial_data = [];
     
     foreach ($response_indices as $trial_index) {
-        $trial_data[] = get_previous_trial_data($trial_index[0], $trial_index[1]);
+        $trial_data[] = get_previous_trial_data(
+            $trial_index[0],
+            $trial_index[1],
+            $with_proc_and_stim
+        );
     }
     
     return $trial_data;
 }
 
-function get_previous_trial_data($position, $post_trial) {
+function get_previous_trial_data($position, $post_trial, $with_proc_and_stim) {
     $trial = [
-        'Procedure' => get_trial_procedure($position, $post_trial),
-        'Stimuli'   => null,
         'Responses' => $_SESSION['Responses'][$position][$post_trial]
     ];
     
-    $trial['Stimuli'] = get_stimuli_rows($trial['Procedure']['Stim Rows']);
+    if ($with_proc_and_stim) {
+        $trial['Procedure'] = get_trial_procedure($position, $post_trial);
+        $trial['Stimuli']   = get_stimuli_rows($trial['Procedure']['Stim Rows']);
+    }
     
     return $trial;
 }
@@ -132,13 +167,15 @@ function get_trial_absolute_indices($settings, $trial_indices) {
     $prev_range  = $settings['previous_range']  ?? false;
     $abs_range   = $settings['absolute_range']  ?? false;
     $labels      = $settings['labels']          ?? false;
+    $prev_rows   = $settings['previous_rows']   ?? false;
     $trial_count = count($trial_indices);
     
     $indices = array_merge(
         get_prev_trial_indices($prev_trials, $trial_count),
         get_prev_range_indices($prev_range,  $trial_count),
         get_abs_range_indices( $abs_range,   $trial_count),
-        get_labled_indices(    $labels,      $trial_indices)
+        get_labled_indices(    $labels,      $trial_indices),
+        get_prev_row_indices(  $prev_rows,   $trial_indices)
     );
     
     $indices = array_keys(array_flip($indices));
@@ -219,6 +256,21 @@ function get_labled_indices($labels, $trial_indices) {
     }
     
     return $indices;
+}
+
+function get_prev_row_indices($prev_rows, $trial_indices) {
+    $trial_count = 0;
+    $pos = $_SESSION['Position'];
+    
+    for ($i = $pos - $prev_rows; $i <= $pos; ++$i) {
+        if (!isset($_SESSION['Responses'][$i])) continue;
+        
+        foreach ($_SESSION['Responses'][$i] as $post => $resp) {
+            ++$trial_count;
+        }
+    }
+    
+    return array_slice(array_keys($trial_indices), -$trial_count);
 }
 
 ## Error handling
