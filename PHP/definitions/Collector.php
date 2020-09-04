@@ -266,7 +266,14 @@ function get_trial_types() {
 }
 
 function get_trial_type_dir($trial_type) {
-    return get_trial_types()[strtolower($trial_type)];
+    $types = get_trial_types();
+    $type_lower = strtolower($trial_type);
+    
+    if (!isset($types[$type_lower])) {
+        throw new Exception("bad trial type: empty string");
+    }
+    
+    return $types[$type_lower];
 }
 
 function get_trial_type_dir_url($trial_type) {
@@ -409,7 +416,7 @@ function parse_trial_settings($settings_val, $trial_type) {
 
 function missing_setting_exception($trial_type, $key) {
     $msg = "The trial type '$trial_type' requires a setting '$key' to be "
-         . "provided in the Settings column (e.g., '$key': 'some value...'";
+         . "provided in the Settings column (e.g., '$key': 'some value...')";
     throw new Exception($msg);
 }
 

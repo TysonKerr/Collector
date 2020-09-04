@@ -50,9 +50,20 @@ function check_for_errors_in_procedure($procedure) {
             
             $trial_type = strtolower($proc_values['Trial Type']);
             
-            if ($trial_type !== '' and !isset($trial_types[$trial_type])) {
+            if ($trial_type === '') continue;
+            
+            if (!isset($trial_types[$trial_type])) {
                 $col = $post === 0 ? 'Trial Type' : "Post $post Trial Type";
                 $errors[] = "Row $row_num: trial type '$trial_type' does not exist.";
+                continue;
+            }
+            
+            $settings = $proc_values['Settings'] ?? '';
+            
+            try {
+                $settings = parse_trial_settings($settings, $trial_type);
+            } catch (Exception $e) {
+                $errors[] = "Row $row_num: error with settings:\n  " . $e->getMessage();
             }
         }
     }
@@ -97,8 +108,7 @@ function check_for_errors_in_stimuli($stim) {
 
 function check_all_conditions() {
     $conditions_indices = get_possible_conditions_indices();
-    $procs = [];
-    $stims = [];
+    $all_files = ['procs' => [], 'stims' => []];
     $all_errors = [];
     
     foreach ($conditions_indices as $index) {
@@ -108,23 +118,21 @@ function check_all_conditions() {
             $conditions = get_conditions($index);
             
             foreach ($conditions as $condition) {
-                if (!isset($procs[$condition['Procedure']])) {
-                    $procs[$condition['Procedure']] = true;
-                    
-                    try {
-                        get_procedure($condition['Procedure']);
-                    } catch (Exception $e) {
-                        $errors[] = $e->getMessage();
-                    }
-                }
+                $files = get_files_in_condition($condition);
                 
-                if (!isset($stims[$condition['Stimuli']])) {
-                    $stims[$condition['Stimuli']] = true;
-                    
-                    try {
-                        get_stimuli($condition['Stimuli']);
-                    } catch (Exception $e) {
-                        $errors[] = $e->getMessage();
+                foreach ($files as $type => $file_list) {
+                    foreach ($file_list as $filename) {
+                        if (isset($all_files[$type][$filename])) continue;
+                        
+                        $all_files[$type][$filename] = true;
+                        
+                        try {
+                            $type === 'procs'
+                                ? get_procedure($filename)
+                                : get_stimuli($filename);
+                        } catch (Exception $e) {
+                            $errors[] = $e->getMessage();
+                        }
                     }
                 }
             }
@@ -142,6 +150,13 @@ function check_all_conditions() {
     if (count($all_errors) > 0) {
         throw new Exception("\nErrors in experiment files.\nPlease correct these before continuing.\n\n" . implode("\n", $all_errors));
     }
+}
+
+function get_files_in_condition($condition) {
+    return [
+        'procs' => explode(',', $condition['Procedure']),
+        'stims' => isset($condition['Stimuli']) ? explode(',', $condition['Stimuli']) : []
+    ];
 }
 
 function check_config_proc_files() {
