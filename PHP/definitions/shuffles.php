@@ -455,7 +455,8 @@ function multiLevelShuffle ($input, $levels = 0) {
         for ($i=0; $i < count($input); $i++) {
             $current   = $input[$i][$root.$levels];                     // save current shuffle code
             $currentLo = $input[$i][$root.$subLevel];                   // save lower shuffle code
-            if ((strpos($begin, $offChar) !== false)                     // if the current shuffle code is turned off
+            if ($begin == ''
+                 or (strpos($begin, $offChar) !== false)                     // if the current shuffle code is turned off
                  OR (strtolower($begin) == 'off')
              ) {
                 if ($begin == $current) {
@@ -466,7 +467,8 @@ function multiLevelShuffle ($input, $levels = 0) {
                     $subset = array();                                  // empty the subset
                     $begin = $current;
                     // $beginLo = $currentLo;
-                    if ((strpos($begin, $offChar) !== false)                 // if the next code is turned off
+                    if ($begin == ''
+                         or (strpos($begin, $offChar) !== false)                 // if the next code is turned off
                          OR (strtolower($begin) == 'off')
                      ) {
                         $subset[] = $input[$i];                             // add it to the current subset
@@ -489,7 +491,8 @@ function multiLevelShuffle ($input, $levels = 0) {
                 $subset = array();
                 $begin  = $current;
                 $holder = array();
-                if ((strpos($begin, $offChar) !== false)
+                if ($begin == ''
+                    or (strpos($begin, $offChar) !== false)
                     OR (strtolower($begin) == 'off')
                 ) {
                     $subset[] = $input[$i];                         // add current item to the subset if shuffle code is off
@@ -521,7 +524,8 @@ function multiLevelShuffle ($input, $levels = 0) {
             $groupedItems[$group][] = $subArray;                    // group each item by shuffle code
         }
         foreach ($groupedItems as $shuffleType => &$items) {
-            if ((strtolower($shuffleType) == 'off')                 // if the group code is set to off
+            if ($shuffleType == ''
+                or (strtolower($shuffleType) == 'off')                 // if the group code is set to off
                 OR (strpos($shuffleType, $offChar) !== false)
             ) {
                 continue;                                               // skip shuffling of items (within the group)
