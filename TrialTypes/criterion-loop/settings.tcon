@@ -1,5 +1,28 @@
+// "rows" should be set in the settings column, with something like
+// "rows: 4". It works the same as the "previous_rows" setting for the
+// feedback trial type. If the criterion is not met with the performance of
+// those trials, all those trials plus the current row in the procedure file
+// will be repeated
 rows
-criterion: 0.75
+
+// the scoring column should probably be "Accuracy", "lenientAcc", or "strictAcc"
+// it must be a column with numeric values, and these values will be averaged
+// to see if it meets the criterion for advancing
+// Keep in mind, Accuracy is usually a number from 0-100, while "lenientAcc"
+// and "strictAcc" are either 0 or 1
 scoring_column: lenientAcc
+
+// the average value of the scoring_column that must be achieved before the
+// experiment can advance
+criterion: 0.75
+
+// if max_iterations is a number, then participants will loop through the 
+// selected trials at most that many times before being shown the failure
+// trial. 
+// if false, the criterion will loop indefinitely until criterion is met
 max_iterations: false
+
+// the name of the trial type that will be added to the procedure if
+// the criterion is not met after max_iterations loops. You can edit that
+// trial type to show whatever exit message you want participants to see
 trial_type_on_fail: criterion-fail

@@ -92,8 +92,7 @@ function send_trial_values_to_javascript($trial_values) {
 ## Retrieving previous trial data
 
 function get_average_response_from_trials($settings, $columns) {
-    $trials = get_previous_trial_responses($settings, false);
-    $values = get_response_values_from_trials($trials, $columns);
+    $values = get_response_values_from_trials($settings, $columns);
     $scores = [];
     
     foreach ($values as $col => $vals) {
@@ -103,7 +102,8 @@ function get_average_response_from_trials($settings, $columns) {
     return $scores;
 }
 
-function get_response_values_from_trials($trials, $columns) {
+function get_response_values_from_trials($settings, $columns) {
+    $trials = get_previous_trial_responses($settings, false);
     $values = [];
     
     foreach ($columns as $col) {
@@ -251,14 +251,14 @@ function get_labled_indices($labels, $trial_indices) {
             
             if (isset($labels[$label])) $indices[] = $i;
         }
-        
-        $indices[] = $i;
     }
     
     return $indices;
 }
 
 function get_prev_row_indices($prev_rows, $trial_indices) {
+    if ($prev_rows === false) return [];
+    
     $trial_count = 0;
     $pos = $_SESSION['Position'];
     
@@ -269,6 +269,8 @@ function get_prev_row_indices($prev_rows, $trial_indices) {
             ++$trial_count;
         }
     }
+    
+    if ($trial_count < 1) return [];
     
     return array_slice(array_keys($trial_indices), -$trial_count);
 }

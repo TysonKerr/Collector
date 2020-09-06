@@ -5,5 +5,5 @@ copy,3,user,,,off
 copy,4,user,,,off
 copy,5,user,,,off
 test-list,2::5,user,,,off
-criterion-loop,0,user,rows: 5 criterion: 0.75 max_iterations: 2,,off
+criterion-loop,0,user,"rows: 5, criterion: 0.75, max_iterations: 2",,off
 instruct,0,user,,You succeeded!,off

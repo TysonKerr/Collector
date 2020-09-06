@@ -491,3 +491,11 @@ function get_numeric_values($arr) {
     
     return $numbers;
 }
+
+function get_array_sum($values) {
+    $numbers = get_numeric_values(get_flat_array($values));
+    
+    return count($numbers) === 0
+         ? 0
+         : array_sum($numbers);
+}

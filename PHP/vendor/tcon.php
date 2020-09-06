@@ -33,10 +33,6 @@ const SPECIAL_CHARS = [
     '}' => OBJECT_END,
     ',' => VAL_SEPARATOR,
     ':' => KEY_SEPARATOR,
-    '<' => LINE_AS_LIST,
-    '>' => LINE_AS_STRING,
-    "\r" => ROW_END,
-    "\n" => ROW_END,
     '%' => MULTI_LINE_STRING,
 ];
 
@@ -60,7 +56,7 @@ function tcon_parse($str, $as_array = true) {
     }
 }
 
-function parse_array($str, &$i = 0, $depth = 0, $row_end = false) {
+function parse_array($str, &$i = 0, $depth = 0) {
     if (++$depth > MAX_DEPTH) throw new Exception('too deep');
     
     $vals = [];
@@ -69,7 +65,7 @@ function parse_array($str, &$i = 0, $depth = 0, $row_end = false) {
     $parse_last_str = false;
     
     while (isset($str[$i])) {
-        $next_val = read_next_val($str, $i, $depth, $enclosed, $row_end);
+        $next_val = read_next_val($str, $i, $depth, $enclosed);
         
         if ($next_val === null or $next_val === OBJECT_END) {
             break;
@@ -92,13 +88,11 @@ function parse_array($str, &$i = 0, $depth = 0, $row_end = false) {
     return $vals;
 }
 
-function read_next_val($str, &$i, $depth, &$enclosed, $row_end = false) {
+function read_next_val($str, &$i, $depth, &$enclosed) {
     $enclosed = true;
     
     while (isset($str[$i]) and skip_comments($str, $i)) {
         $char = $str[$i++];
-        
-        if ($row_end and (SPECIAL_CHARS[$char] ?? 0) === ROW_END) return null;
         
         if (ctype_space($char)) continue;
         
@@ -107,8 +101,6 @@ function read_next_val($str, &$i, $depth, &$enclosed, $row_end = false) {
             case KEY_SEPARATOR:    return KEY_SEPARATOR;
             case OBJECT_END:       return OBJECT_END;
             case OBJECT_START:     return parse_array($str, $i, $depth);
-            case LINE_AS_LIST:     return parse_array($str, $i, $depth, true);
-            case LINE_AS_STRING:   return parse_line_as_string($str, $i);
             case STRING_ENCLOSURE: return parse_string($str, $i, $char);
             case MULTI_LINE_STRING: return parse_ml_string($str, $i, $char);
             default: $enclosed = false; return parse_string($str, $i);
@@ -160,10 +152,6 @@ function parse_ml_string($str, &$i, $char) {
     return implode("\n", $trimmed_strings);
 }
 
-function parse_line_as_string($str, &$i) {
-    return trim(parse_string($str, $i, "\r"));
-}
-
 function parse_string($str, &$i, $enclosure = false) {
     $len = 0;
     // we incremented $i when we were reading the char that we detected as a
@@ -192,13 +180,14 @@ function parse_string($str, &$i, $enclosure = false) {
         }
         
         if ($enclosure === false) {
-            if (isset(SPECIAL_CHARS[$char]) or ctype_space($char)
-                or $char === '#'
-                or ($char === '/' and ($str[$i+1] === '/' or $str[$i+1] === '*'))
+            if (isset(SPECIAL_CHARS[$char])
+                or $char === "\r" or $char === "\n"
+                or $char === '#' or ($char === '/' and (isset($str[$i+1])
+                  and ($str[$i+1] === '/' or $str[$i+1] === '*')))
             ) {
                 break;
             }
-        } else if ($char === $enclosure or ($enclosure === "\r" and $char === "\n")) {
+        } else if ($char === $enclosure) {
             ++$i;
             break;
         }
@@ -215,21 +204,11 @@ function parse_string($str, &$i, $enclosure = false) {
     } while(isset($str[++$i]));
     
     $substrs[] = substr($str, $start, $len);
-    return implode('', $substrs);
-}
-
-function get_str_without_escape_char($str) {
-    $substrs = explode('\\', $str);
+    $string = implode('', $substrs);
     
-    if (count($substrs) > 1) {
-        echo '<pre>'; var_dump($substrs); echo '</pre>';
-    }
+    if ($enclosure === false) $string = trim($string);
     
-    foreach ($substrs as $i => $substr) {
-        if ($substr === '') unset($substrs[$i]);
-    }
-    
-    return implode('\\', $substrs);
+    return $string;
 }
 
 function store_val($val, &$vals, &$strings, $has_key, &$parse_last_str, $enclosed) {

@@ -1,11 +1,30 @@
-//
+// the number of previous trials to select
+// for example, setting this to 4 would select the previous 4 trials
+// post trials count as their own trials, so if the previous 2 rows had 
+// both a main trial and 1 post trial, then using "previous_trials: 4" would
+// select the trials from those 2 rows
 previous_trials: 0
 
-//
+// a range looks like 1::4
+// this would select the previous 4 trials from the current trial
+// it doesn't have to start at the previous trial, or be continuous, so to
+// select the trial that was 2, 4, and 6 positions back, you can use
+// "2,4,6"
 previous_range: false
 
-//
+// this can either be a single value, like "test phase",
+// or a list of values, like "[test1, test2, test3]"
+// trials will be selected if they have the exact matching value
+// (case sensitive) in a column "Label" (for post trials, you can use
+// a column like "Post 2 Label")
 labels: false
 
-//
+// you can specify a range like 0::9
+// please note that the first trial has the index of 0
+// so to select the first 10 trials, use 0::9
 absolute_range: false
+
+// will search through rows of the procedure file, including all post trials
+// a value of false will prevent this use of selecting trials
+// while a value of 0 will include earlier post-trials from the current row
+previous_rows: false

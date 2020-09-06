@@ -12,4 +12,4 @@ copy,7,user,,,off,study2
 copy,8,user,,,off,study2
 copy,9,user,,,off,study2
 feedback,0,user,previous_trials: 4,feedback 5: <br> points: $lenientAcc,off,
-feedback,0,user,labels: [study1 study2],feedback 6: <br> points: $lenientAcc,off,
+feedback,0,user,"labels: [study1, study2]",feedback 6: <br> points: $lenientAcc,off,
