@@ -102,7 +102,7 @@ function print_csv_table_css()
                                     padding:2px 6px; overflow:hidden; }
         .display2dArray td        { max-width:200px; }
         .display2dArray th        { max-width:200px; white-space: normal; }
-        .display2dArray td > div  { max-height:1.5em; overflow:hidden; }
+        .display2dArray td > div  {  overflow:hidden; white-space: nowrap; text-overflow: ellipsis; }
       </style>
     ';
 }

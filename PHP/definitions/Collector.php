@@ -397,7 +397,7 @@ function check_if_logged_in() {
 
 function parse_trial_settings($settings_val, $trial_type) {
     try {
-        $settings = tcon\tcon_parse($settings_val);
+        $settings = parse_settings($settings_val);
     } catch (Exception $e) {
         $settings_html = htmlspecialchars($settings_val);
         $msg = $e->getMessage();
@@ -412,6 +412,10 @@ function parse_trial_settings($settings_val, $trial_type) {
     }
     
     return $settings;
+}
+
+function parse_settings($val) {
+    return tcon\tcon_parse($val);
 }
 
 function missing_setting_exception($trial_type, $key) {
@@ -458,7 +462,7 @@ function get_default_settings($trial_type) {
     if (!is_file($filename)) return[];
     
     try {
-        $defaults = tcon\tcon_parse(file_get_contents($filename));
+        $defaults = parse_settings(file_get_contents($filename));
     } catch (Exception $e) {
         $msg = $e->getMessage();
         throw new Exception("Failed to parse tcon file 'settings.tcon' in the '$trial_type' trial type folder, error message:\n $msg");

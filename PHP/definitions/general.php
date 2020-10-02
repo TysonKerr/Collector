@@ -18,7 +18,7 @@ require __DIR__ . '/shuffles.php';
 function get_range($string, $separator = ',', $range_indicator = '::')
 {
     $output = array();
-    $ranges = explode($separator, $string);
+    $ranges = explode_escaped($separator, $string);
     
     foreach ($ranges as $range) {
         // get the end points of the range
@@ -45,6 +45,22 @@ function get_range($string, $separator = ',', $range_indicator = '::')
     }
     
     return $output;
+}
+/**
+ * splits a string by a substring, except when that substring follows a backslash
+ * @param string $delimiter substring to split at
+ * @param string $string String to split
+ * @return array
+ */
+function explode_escaped($delimiter, $string) {
+    $string_escaped = str_replace('\\' . $delimiter, chr(8), $string);
+    $exploded = explode($delimiter, $string_escaped);
+    
+    foreach ($exploded as $i => $substring) {
+        $exploded[$i] = str_replace(chr(8), $delimiter, $substring);
+    }
+    
+    return $exploded;
 }
 /**
  * Generates a random, lowercase alphanumeric string.

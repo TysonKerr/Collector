@@ -1,0 +1,205 @@
+/*
+ * Page Structure
+ */
+body {
+    background-color: #667;
+}
+
+#content {
+    max-width: 100%;
+    display: block;
+    padding: 0;
+}
+
+.survey-container {
+    text-align: center;
+}
+
+.survey-page {
+    display: none;
+    text-align: left;
+    max-width: 100%;
+    background-color: white;
+    padding: 25px;
+    border: 2px solid #445;
+    border-radius: 8px;
+}
+
+.survey-page.current-page {
+    display: inline-block;
+}
+
+.prompt-container {
+    margin: 1.2em auto;
+    max-width: 500px; /* dont expand parent container beyond this */
+    max-width: min(max-content, 500px); /* dont expand parent container beyond this */
+    min-width: 100%; /* expand to fill page, if other elements expand container */
+}
+
+.page-break-container {
+    margin-top: 3em;
+    text-align: center;
+}
+
+/*
+ * Tables
+ */
+.survey-table {
+    display: table;
+    border-collapse: collapse;
+    --border-c: #666;
+    border: 1px solid var(--border-c);
+    text-align: center;
+    margin-bottom: 2.5em;
+    table-layout: auto;
+}
+
+.table-row {
+    display: table-row;
+    background-color: white;
+}
+
+.table-row:nth-child(even) {
+    background-color: #ddd;
+}
+
+.table-header {
+    display: table-cell;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    bottom: 1.5em;
+    background-clip: padding-box;
+    background-color: white;
+    font-weight: bolder;
+    padding: 2px 6px;
+}
+
+.table-header:not(:first-child) {
+    width: max-content;
+}
+
+/* add the appearance of a border to a stickied element */
+.table-header:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    border-bottom: 1px solid var(--border-c, black);
+}
+
+.table-cell {
+    border-bottom: 1px solid var(--border-c, black);
+    padding: 2px 4px;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.table-question {
+    text-align: left;
+}
+
+.survey-table input[type="radio"] {
+    vertical-align: middle;
+}
+
+/*
+ * Specific type styling
+ */
+/* input */
+.input-container {
+    display: flex;
+    align-items: center;
+    padding-bottom: 5px;
+}
+
+.input-container > span {
+    flex-grow: 1;
+    padding-right: 5px;
+}
+
+/* textarea */
+.textarea-container {
+    margin-bottom: 2.5em;
+}
+
+.survey-textarea {
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+    height: 5em;
+    min-height: 1.5em;
+}
+
+/* likert */
+.likert-container {
+    max-width: max-content;
+    margin: auto;
+}
+
+.likert-prompt {
+    font-weight: bolder;
+    font-size: 150%;
+    text-align: center;
+    margin: 30px auto 0px;
+    line-height: 1.15em;
+}
+
+.likert-sub-prompt, .likert-scale {
+    opacity: 0.8;
+    padding: 4px 0;
+}
+
+.likert-sub-prompt {
+    text-align: center;
+}
+
+.likert-scale {
+    display: flex;
+    justify-content: space-between;
+}
+
+.likert-scale > div {
+    padding: 0px 8px;
+}
+
+.likert-inputs-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 2px 0 5px;
+}
+
+.likert-option {
+    cursor: pointer;
+    position: relative;
+}
+
+.likert-option > input {
+    position: absolute;
+    height: 1px;
+    width: 1px;
+    top: 50%;
+    left: 50%;
+    opacity: 0.001;
+    pointer-events: none;
+}
+
+.likert-option > input + span {
+    padding: 4px 8px;
+    border: 2px solid white;
+    border-radius: 20px;
+}
+
+.likert-option > input:focus + span {
+    border-color: #00dd00;
+    background-color: #ddffdd;
+}
+
+.likert-option > input:checked + span {
+    border-color: #008800;
+}
+
+.likert-option:hover > input + span {
+    border-color: #00dd00;
+}

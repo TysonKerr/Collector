@@ -34,6 +34,7 @@
 
 const COLLECTOR = {
 
+    autofocus: true,
     /**
      *  Sets starting time to a property we can access anywhere in the namespace
      */
@@ -221,7 +222,10 @@ const COLLECTOR = {
             if (isNaN(trialTime) || trialTime > 0) {
                 $("#content").removeClass("invisible");                     // unhide trial contents
                 COLLECTOR.startTime = Date.now();
-                $(':input:not(:radio,:checkbox):enabled:visible').first().focusWithoutScrolling();  // focus cursor on first input
+                
+                if (COLLECTOR.autofocus) {
+                    $(':input:not(:radio,:checkbox):enabled:visible').first().focusWithoutScrolling();  // focus cursor on first input
+                }
             } else {
                 $("form").submit();
             }

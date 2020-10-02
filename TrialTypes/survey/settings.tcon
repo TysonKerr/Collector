@@ -1,0 +1,3 @@
+// the filename can be specified either through the Cue column in the 
+// Stimuli file, or here in the settings
+survey: false

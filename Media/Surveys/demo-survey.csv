@@ -1,0 +1,19 @@
+Question Name,Text,Type,Text 2,Choices,Values,Required,Settings,Score: radio_questions,Shuffle
+age,Age,input,,,,,"type: number, min: 0, max: 150",,
+occupation,Most recent occupation,input,,,,,,,
+6,,page-break,,,,,,,
+1,This is a demo for the survey trial type.,instruct,,,,,,,
+looks,How does it look?,radio-table,,"Very bad, Bad, Good, Excellent",0::3,,header_width: 85px,1,radios
+color,What do you think of the styling?,radio-table,,"Very bad, Bad, Good, Excellent",0::3,,header_width: 85px,1,radios
+weather,How is the weather?,radio-table,,"Very bad, Bad, Good, Excellent",0::3,,header_width: 85px,1,radios
+feeling,How are you feeling?,radio-table,,"Very bad, Bad, Good, Excellent",0::3,,header_width: 85px,1,radios
+2,"<p>This is another text example. These can be as long as you like.</p> <p>To help space things out, you can add html &lt;p&gt; tags around paragraphs. &lt;/p&gt; Just be sure to close any tags that you open.</p>",instruct,,,,,,,
+comments,Do you have any comments so far?,textarea,,,,,,,
+3,,page-break,,,,,,,
+4,This is the second page.,instruct,,,,,,,
+5,How important are the following to you?,instruct,,,,,,,
+health,Health,likert,<-- Not important ---------- Very important -->,1::4,0::3,,,,
+family,Family,likert,"Not important, Very important",1::7,7::1,,,,
+finance,Financial Security,likert,"Not important, Somewhat important, Very important",1::10,,,,,
+society,The advancement of society,likert,"Boo, Meh, Hmm, Yay",A::F,1::6,,,,
+survey,This survey,likert,,"Very important, Very very important",,yes,,,
