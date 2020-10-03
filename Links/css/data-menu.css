@@ -6,6 +6,7 @@ html, body, #Collector-content {
     height: 100%;
     background-color: #bbb;
     text-align: center;
+    line-height: 1.15;
 }
 
 #Collector-content {
