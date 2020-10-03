@@ -419,6 +419,7 @@ const multi_trial = {
     trial: 0,
     phase: 0,
     callbacks: {},
+    phase_end_callbacks: {},
     
     trial_start: 0,
     phase_start: 0,
@@ -542,25 +543,29 @@ const multi_trial = {
     },
     
     end_phase: function() {
-        this.set_phase_duration();
+        const phase_name = this.get_phase_name(this.phase);
+        
+        if (phase_name in this.phase_end_callbacks) {
+            if (this.phase_end_callbacks[phase_name]() === false) return;
+        }
+        
+        this.set_phase_duration(phase_name);
         this.cancel_phase_timer();
         document.querySelector(".current-phase").classList.remove("current-phase");
         ++this.phase;
         this.start_phase();
     },
     
-    set_phase_duration: function() {
-        const duration_input = this.get_duration_input();
+    set_phase_duration: function(phase_name) {
+        const duration_input = this.get_duration_input(phase_name);
         
         if (duration_input !== null) {
             duration_input.value = this.get_phase_duration();
         }
     },
     
-    get_duration_input: function() {
-        const phase_name = this.get_phase_name(this.phase);
-        const container = this.get_phase_container(phase_name);
-        return container.querySelector(`.${phase_name}-duration`);
+    get_duration_input: function(phase_name) {
+        return document.querySelector(`.current-phase .${phase_name}-duration`);
     },
     
     get_phase_duration: function() {
