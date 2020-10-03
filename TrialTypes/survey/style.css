@@ -143,7 +143,7 @@ body {
     font-size: 150%;
     text-align: center;
     margin: 30px auto 0px;
-    line-height: 1.15em;
+    line-height: 1.15;
 }
 
 .likert-sub-prompt, .likert-scale {

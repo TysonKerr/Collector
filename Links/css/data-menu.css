@@ -99,7 +99,7 @@ input[type='checkbox'] {
 }
 
 .id-list {
-    line-height: 1em;
+    line-height: 1;
     height: 1em;
     overflow-y: auto;
 }

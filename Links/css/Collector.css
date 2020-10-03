@@ -61,7 +61,7 @@ html, body {
   height: 100%;
   width: 100%;
   color: rgba(0, 0, 0, 0.87);
-  line-height: 1.5em;
+  line-height: 1.5;
   font-family: "Open Sans", sans-serif;
   box-sizing: border-box;
 }
@@ -173,7 +173,7 @@ input {
 
 .login-error-message {
     color: #600;
-    line-height: 2em;
+    line-height: 2;
 }
 
 .exp-description {
@@ -181,7 +181,7 @@ input {
     margin: 0 auto 1em;
     text-align: left;
     max-width: 700px;
-    line-height: 1.5em;
+    line-height: 1.5;
 }
 
 #login-consent-container {

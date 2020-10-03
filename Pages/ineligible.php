@@ -2,7 +2,7 @@
     p {
         max-width: 600px;
         font-size: 125%;
-        line-height: 1.75em;
+        line-height: 1.75;
         margin: auto;
         text-align: left;
     }
