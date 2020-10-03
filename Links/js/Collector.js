@@ -542,15 +542,36 @@ const multi_trial = {
     },
     
     end_phase: function() {
+        this.set_phase_duration();
+        this.cancel_phase_timer();
         document.querySelector(".current-phase").classList.remove("current-phase");
         ++this.phase;
+        this.start_phase();
+    },
+    
+    set_phase_duration: function() {
+        const duration_input = this.get_duration_input();
         
+        if (duration_input !== null) {
+            duration_input.value = this.get_phase_duration();
+        }
+    },
+    
+    get_duration_input: function() {
+        const phase_name = this.get_phase_name(this.phase);
+        const container = this.get_phase_container(phase_name);
+        return container.querySelector(`.${phase_name}-duration`);
+    },
+    
+    get_phase_duration: function() {
+        return performance.now() - this.phase_start;
+    },
+    
+    cancel_phase_timer: function() {
         if (this.phase_timer !== null) {
             this.phase_timer.cancel();
             this.phase_timer = null;
         }
-        
-        this.start_phase();
     },
     
     end_trial: function() {

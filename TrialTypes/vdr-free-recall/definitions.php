@@ -80,7 +80,7 @@ function get_selectivity_index($values, $score, $num_correct) {
     $chance = $ave * $num_correct;
     $ideal = get_ideal_score($values, $num_correct);
     
-    if ($ideal - $chance === 0) return 0;
+    if ($ideal - $chance == 0) return 0;
     
     $selectivity_index = ($score - $chance) / ($ideal - $chance);
     return round($selectivity_index * 1000) / 1000;
